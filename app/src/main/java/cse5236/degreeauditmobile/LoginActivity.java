@@ -1,18 +1,27 @@
 package cse5236.degreeauditmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "DegreeAuditMobile";
+    private static final String TAG = "Login: ";
+    private Button loginSubmitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
+
+        loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
+
+        Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
+        loginSubmitBtn.setOnClickListener(v -> startActivity(mainMenuIntent));
     }
 
     @Override
