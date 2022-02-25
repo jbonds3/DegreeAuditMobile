@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "Login: ";
+    private static final String TAG = "THE Login Activity";
     private Button loginSubmitBtn;
 
     @Override
@@ -18,8 +18,14 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_login);
 
-        loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_login_form, LoginFormFragment.class, null)
+                    .commit();
+        }
 
+        loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
         Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
         loginSubmitBtn.setOnClickListener(v -> startActivity(mainMenuIntent));
     }

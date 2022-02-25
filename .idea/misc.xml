@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_main_menu.xml" value="0.1" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_login_form.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/main_menu.xml" value="0.22083333333333333" />
       </map>
     </option>
