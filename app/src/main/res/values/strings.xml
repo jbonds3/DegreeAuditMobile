@@ -5,4 +5,14 @@
     <string name="loginSubmitBtnText">Submit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome, User!</string>
+    <string name="progress_button">Check My Progress</string>
+    <string name="add_semester_button">Add New Semester</string>
+    <string name="edit_semester_button">Edit Existing Semester</string>
+    <string name="edit_account_info_button">Edit Account Information</string>
+    <string name="progress_button_toast">User wanted to check progress</string>
+    <string name="add_semester_toast">User wanted to add semester</string>
+    <string name="edit_semester_toast">User wanted to edit semester</string>
+    <string name="edit_account_info_toast">User wanted to edit account information</string>
+
 </resources>
