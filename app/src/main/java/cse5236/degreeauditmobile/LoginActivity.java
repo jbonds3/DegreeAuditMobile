@@ -34,15 +34,21 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginText = findViewById(R.id.signInTextIET);
                 String username = loginText.getText().toString();
-                passwordText = findViewById(R.id.passwordTextIET);
-                String enteredPassword = passwordText.getText().toString();
-                String actualPassword = userDao.getPassword(username);
-                if (enteredPassword.equals(actualPassword)) {
-                    mainMenuIntent.putExtra("username", username);
-                    startActivity(mainMenuIntent);
+
+                if (userDao.hasEntry(username)) {
+                    passwordText = findViewById(R.id.passwordTextIET);
+                    String enteredPassword = passwordText.getText().toString();
+                    String actualPassword = userDao.getPassword(username);
+                    if (enteredPassword.equals(actualPassword)) {
+                        mainMenuIntent.putExtra("username", username);
+                        startActivity(mainMenuIntent);
+                    } else {
+                        int message = R.string.incorrect_password_toast;
+                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    int message = R.string.incorrect_password_toast;
-                    Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+                    int message = R.string.username_not_found_toast;
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -52,7 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         userDao = db.userDao();
 
         User sampleUser = new User("Uber", "123");
-        //userDao.insertAll(sampleUser);
+        if (!userDao.hasEntry(sampleUser.userName)) {
+            userDao.insertAll(sampleUser);
+        }
 
     }
 

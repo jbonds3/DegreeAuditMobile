@@ -15,5 +15,6 @@
     <string name="edit_semester_toast">User wanted to edit semester</string>
     <string name="edit_account_info_toast">User wanted to edit account information</string>
     <string name="incorrect_password_toast">Incorrect password!</string>
+    <string name="username_not_found_toast">User with that name does not exist!</string>
 
 </resources>
