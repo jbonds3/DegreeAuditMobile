@@ -1,6 +1,7 @@
 package cse5236.degreeauditmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,19 +16,15 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "THE Login Activity";
     private Button loginSubmitBtn;
     private com.google.android.material.textfield.TextInputEditText loginText;
+    private com.google.android.material.textfield.TextInputEditText passwordText;
+    private AppDatabase db;
+    private UserDao userDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_login);
-
-        /*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragment_login_form, LoginFormFragment.class, null)
-                    .commit();
-        }*/
 
         loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
         Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
@@ -37,10 +34,26 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginText = findViewById(R.id.signInTextIET);
                 String username = loginText.getText().toString();
-                mainMenuIntent.putExtra("username",username);
-                startActivity(mainMenuIntent);
+                passwordText = findViewById(R.id.passwordTextIET);
+                String enteredPassword = passwordText.getText().toString();
+                String actualPassword = userDao.getPassword(username);
+                if (enteredPassword.equals(actualPassword)) {
+                    mainMenuIntent.putExtra("username", username);
+                    startActivity(mainMenuIntent);
+                } else {
+                    int message = R.string.incorrect_password_toast;
+                    Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();;
+        userDao = db.userDao();
+
+        User sampleUser = new User("Uber", "123");
+        //userDao.insertAll(sampleUser);
+
     }
 
     @Override

@@ -14,5 +14,6 @@
     <string name="add_semester_toast">User wanted to add semester</string>
     <string name="edit_semester_toast">User wanted to edit semester</string>
     <string name="edit_account_info_toast">User wanted to edit account information</string>
+    <string name="incorrect_password_toast">Incorrect password!</string>
 
 </resources>
