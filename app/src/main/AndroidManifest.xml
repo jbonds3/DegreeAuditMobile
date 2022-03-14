@@ -13,6 +13,9 @@
             android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
+            android:name=".UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>

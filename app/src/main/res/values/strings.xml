@@ -3,7 +3,10 @@
     <string name="signInText">Sign In</string>
     <string name="passwordText">Password</string>
     <string name="loginSubmitBtnText">Submit</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="updateSubmitBtnText">Submit</string>
+    <string name="oldPasswordText">Enter your current password</string>
+    <string name="newPasswordText">Enter new password</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome">Welcome, User!</string>
     <string name="progress_button">Check My Progress</string>
