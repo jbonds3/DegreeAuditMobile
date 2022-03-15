@@ -4,6 +4,7 @@
     <string name="passwordText">Password</string>
     <string name="loginSubmitBtnText">Submit</string>
     <string name="updateSubmitBtnText">Submit</string>
+    <string name="deleteUserButtonText">Self-Destroy</string>
     <string name="oldPasswordText">Enter your current password</string>
     <string name="newPasswordText">Enter new password</string>
 

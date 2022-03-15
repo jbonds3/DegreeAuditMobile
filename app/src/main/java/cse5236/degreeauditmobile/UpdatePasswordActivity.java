@@ -13,6 +13,7 @@ import androidx.room.Room;
 public class UpdatePasswordActivity extends AppCompatActivity {
     private static final String TAG = "Update_Password";
     private Button updateSubmitBtn;
+    private Button deleteUserButton;
     private com.google.android.material.textfield.TextInputEditText oldPasswordText;
     private com.google.android.material.textfield.TextInputEditText newPasswordText;
     private String username;
@@ -59,6 +60,18 @@ public class UpdatePasswordActivity extends AppCompatActivity {
 
             }
         });
+
+        deleteUserButton = findViewById(R.id.deleteUserButton);
+        deleteUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User toDelete = userDao.findByName(username);
+                userDao.delete(toDelete);
+                Intent LoginIntent = new Intent(UpdatePasswordActivity.this,LoginActivity.class);
+                startActivity(LoginIntent);
+            }
+        });
+
 
     }
 
