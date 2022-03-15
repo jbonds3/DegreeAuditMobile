@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "THE Login Activity";
     private Button loginSubmitBtn;
+    private Button newUserButton;
     private com.google.android.material.textfield.TextInputEditText loginText;
     private com.google.android.material.textfield.TextInputEditText passwordText;
     private AppDatabase db;
@@ -27,8 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
-        Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
-
         loginSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                     String enteredPassword = passwordText.getText().toString();
                     String actualPassword = userDao.getPassword(username);
                     if (enteredPassword.equals(actualPassword)) {
+                        Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
                         mainMenuIntent.putExtra("username", username);
                         startActivity(mainMenuIntent);
                     } else {
@@ -57,10 +57,14 @@ public class LoginActivity extends AppCompatActivity {
                 AppDatabase.class, "database-name").allowMainThreadQueries().build();;
         userDao = db.userDao();
 
-        User sampleUser = new User("Uber", "123");
-        if (!userDao.hasEntry(sampleUser.userName)) {
-            userDao.insertAll(sampleUser);
-        }
+        newUserButton = findViewById(R.id.newUserButton);
+        newUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newUserIntent = new Intent(LoginActivity.this,NewUserActivity.class);
+                startActivity(newUserIntent);
+            }
+        });
 
     }
 

@@ -8,12 +8,12 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/signInText"
+        android:id="@+id/newUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:fontFamily="serif"
-        android:text="@string/signInText"
+        android:text="@string/new_user_text"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/inputFormLL"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,14 +34,14 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signInTextIET"
+            android:id="@+id/usernameTextIET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:hint="@string/signInText"
             android:minWidth="250dp"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/passwordTextIET"
+            app:layout_constraintBottom_toTopOf="@id/passwordTextIET"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="DuplicateSpeakableTextCheck" />
@@ -63,27 +63,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/loginSubmitBtn"
+        android:id="@+id/createUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="96dp"
         android:text="@string/loginSubmitBtnText"
-        app:layout_constraintBottom_toBottomOf="@id/newUserButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFormLL"
-        app:layout_constraintVertical_bias="0.007" />
-
-    <Button
-        android:id="@+id/newUserButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="96dp"
-        android:text="@string/newUserButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginSubmitBtn"
+        app:layout_constraintTop_toBottomOf="@+id/inputFormLL"
         app:layout_constraintVertical_bias="0.007" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

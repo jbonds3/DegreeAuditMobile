@@ -20,5 +20,10 @@
     <string name="edit_account_info_toast">User wanted to edit account information</string>
     <string name="incorrect_password_toast">Incorrect password!</string>
     <string name="username_not_found_toast">User with that name does not exist!</string>
+    <string name="username_already_exists_toast">This username is already taken! Please choose a different one.</string>
+    <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="newUserButtonText">Create new user</string>\
+    <string name="new_user_text">New account registration</string>
+
 
 </resources>
