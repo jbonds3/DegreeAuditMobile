@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
-    private static final String TAG = "MENU_ACTIVITY";
+    private static final String TAG = "MAIN_MENU_ACTIVITY";
 
     private TextView mWelcomeTextView;
     private Button mAddSemesterButton;
@@ -18,14 +19,25 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button mEditAccountInfoButton;
     private Button mProgressButton;
 
+    private String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        Log.d(TAG, "onCreate() called");
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("username")) {
+            username = myIntent.getStringExtra("username");
+        } else {
+            username = "User";
+        }
+        Log.d(TAG,username);
         mWelcomeTextView = findViewById(R.id.welcome_text_view);
-        int welcome = R.string.welcome;
+        String welcome = "Welcome, ";
+        welcome = welcome.concat(username);
         mWelcomeTextView.setText(welcome);
 
         mProgressButton = findViewById(R.id.progress_button);
@@ -59,8 +71,9 @@ public class MainMenuActivity extends AppCompatActivity {
         mEditAccountInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int message = R.string.edit_account_info_toast;
-                Toast.makeText(MainMenuActivity.this,message,Toast.LENGTH_SHORT).show();
+                Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
+                updatePasswordIntent.putExtra("username", username);
+                startActivity(updatePasswordIntent);
             }
         });
 

@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DegreeAuditMobile">
         <activity
+            android:name=".NewUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UpdatePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

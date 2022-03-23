@@ -3,7 +3,11 @@
     <string name="signInText">Sign In</string>
     <string name="passwordText">Password</string>
     <string name="loginSubmitBtnText">Submit</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="updateSubmitBtnText">Submit</string>
+    <string name="deleteUserButtonText">Self-Destroy</string>
+    <string name="oldPasswordText">Enter your current password</string>
+    <string name="newPasswordText">Enter new password</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome">Welcome, User!</string>
     <string name="progress_button">Check My Progress</string>
@@ -14,5 +18,12 @@
     <string name="add_semester_toast">User wanted to add semester</string>
     <string name="edit_semester_toast">User wanted to edit semester</string>
     <string name="edit_account_info_toast">User wanted to edit account information</string>
+    <string name="incorrect_password_toast">Incorrect password!</string>
+    <string name="username_not_found_toast">User with that name does not exist!</string>
+    <string name="username_already_exists_toast">This username is already taken! Please choose a different one.</string>
+    <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="newUserButtonText">Create new user</string>\
+    <string name="new_user_text">New account registration</string>
+
 
 </resources>
