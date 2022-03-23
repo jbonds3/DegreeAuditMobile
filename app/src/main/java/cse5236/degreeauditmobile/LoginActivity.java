@@ -27,17 +27,21 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_login);
 
+        // LOGIN BTN
         loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
-        loginSubmitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        // LOGIN BTN onClickListener with lambda exp
+        loginSubmitBtn.setOnClickListener(v -> {
                 loginText = findViewById(R.id.signInTextIET);
                 String username = loginText.getText().toString();
 
+                // if user in Room database
                 if (userDao.hasEntry(username)) {
                     passwordText = findViewById(R.id.passwordTextIET);
                     String enteredPassword = passwordText.getText().toString();
                     String actualPassword = userDao.getPassword(username);
+
+                    // check input password match user password
                     if (enteredPassword.equals(actualPassword)) {
                         Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
                         mainMenuIntent.putExtra("username", username);
@@ -50,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                     int message = R.string.username_not_found_toast;
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
-            }
         });
 
         db = Room.databaseBuilder(getApplicationContext(),
@@ -58,12 +61,9 @@ public class LoginActivity extends AppCompatActivity {
         userDao = db.userDao();
 
         newUserButton = findViewById(R.id.newUserButton);
-        newUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        newUserButton.setOnClickListener(v -> {
                 Intent newUserIntent = new Intent(LoginActivity.this,NewUserActivity.class);
                 startActivity(newUserIntent);
-            }
         });
 
     }

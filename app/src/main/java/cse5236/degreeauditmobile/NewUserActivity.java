@@ -38,13 +38,15 @@ public class NewUserActivity extends AppCompatActivity {
                 AppDatabase.class, "database-name").allowMainThreadQueries().build();;
         userDao = db.userDao();
 
+        // CREATE USER BTN
         CreateUserButton = (Button) findViewById(R.id.createUserButton);
-        CreateUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        // CREATE USER BTN onClickListener with lambda exp
+        CreateUserButton.setOnClickListener(v -> {
                 usernameText = findViewById(R.id.usernameTextIET);
                 String username = usernameText.getText().toString();
 
+                // check if username is in Room database
                 if (userDao.hasEntry(username)) {
                     int message = R.string.username_already_exists_toast;
                     Toast.makeText(NewUserActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -53,10 +55,12 @@ public class NewUserActivity extends AppCompatActivity {
                     String password = passwordText.getText().toString();
                     User toAdd = new User(username, password);
                     userDao.insertAll(toAdd);
-                    Intent LoginIntent = new Intent(NewUserActivity.this,LoginActivity.class);
-                    startActivity(LoginIntent);
+
+                    // Start intent to main menu
+                    Intent mainMenuIntent = new Intent(NewUserActivity.this,MainMenuActivity.class);
+                    mainMenuIntent.putExtra("username", username);
+                    startActivity(mainMenuIntent);
                 }
-            }
         });
     }
 }
