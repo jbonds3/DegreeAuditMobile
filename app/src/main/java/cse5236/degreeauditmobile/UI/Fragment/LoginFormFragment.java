@@ -1,8 +1,9 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.UI.Fragment;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import cse5236.degreeauditmobile.R;
 
 import android.util.Log;
 import android.view.LayoutInflater;

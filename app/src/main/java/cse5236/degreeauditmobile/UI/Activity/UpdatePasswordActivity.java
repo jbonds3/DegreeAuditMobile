@@ -1,4 +1,4 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.UI.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.R;
+import cse5236.degreeauditmobile.Model.User;
+import cse5236.degreeauditmobile.Model.UserDao;
 
 public class UpdatePasswordActivity extends AppCompatActivity {
     private static final String TAG = "Update_Password";

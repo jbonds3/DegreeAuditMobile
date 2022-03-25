@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DegreeAuditMobile">
         <activity
-            android:name=".NewUserActivity"
+            android:name=".UI.Activity.NewUserActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".UI.Activity.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdatePasswordActivity"
+            android:name=".UI.Activity.UpdatePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".UI.Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

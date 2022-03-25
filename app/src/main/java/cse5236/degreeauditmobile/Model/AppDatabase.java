@@ -1,4 +1,4 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.Model;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

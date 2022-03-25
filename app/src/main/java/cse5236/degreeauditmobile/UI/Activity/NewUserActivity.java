@@ -1,24 +1,20 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.UI.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
-import cse5236.degreeauditmobile.databinding.ActivityNewUserBinding;
+import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.R;
+import cse5236.degreeauditmobile.Model.User;
+import cse5236.degreeauditmobile.Model.UserDao;
 
 public class NewUserActivity extends AppCompatActivity {
     private static final String TAG = "Create_New_User";
