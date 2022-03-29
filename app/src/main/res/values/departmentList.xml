@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="department_array">
+        <item>Major</item>
+        <item>CSE</item>
+    </string-array>
+</resources>

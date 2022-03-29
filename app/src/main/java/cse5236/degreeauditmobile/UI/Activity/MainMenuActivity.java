@@ -3,8 +3,6 @@ package cse5236.degreeauditmobile.UI.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_main_menu);
 
         Log.d(TAG, "onCreate() called");
         Intent myIntent = getIntent();
@@ -53,20 +51,31 @@ public class MainMenuActivity extends AppCompatActivity {
 //            }
 //        });
 
+        //main menu popup btn
         mMainMenuBtn = findViewById(R.id.main_menu_btn);
         mMainMenuBtn.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(MainMenuActivity.this, mMainMenuBtn);
 
             // Inflating popup menu from popup_menu.xml file
             popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+
+                String checkProgressStr = getString(R.string.check_progress_text);
+                String addSemesterStr = getString(R.string.add_semester_button);
+
+                if (menuItem.getTitle() == checkProgressStr) {
+                    Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
+                    startActivity(checkProgressIntent);
+                } else if (menuItem.getTitle() == addSemesterStr) {
+                    Intent checkProgressIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
+                    startActivity(checkProgressIntent);
+                } else {
                     // Toast message on menu item clicked
                     Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                    return true;
                 }
+                return true;
             });
+
             // Showing the popup menu
             popupMenu.show();
         });

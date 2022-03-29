@@ -10,6 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DegreeAuditMobile">
         <activity
+            android:name=".UI.Activity.AddClassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.AddSemesterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.CheckProgressActivity"
+            android:exported="false"
+            android:label="@string/title_activity_check_progress"
+            android:theme="@style/Theme.DegreeAuditMobile.NoActionBar" />
+        <activity
             android:name=".UI.Activity.NewUserActivity"
             android:exported="false" />
         <activity
