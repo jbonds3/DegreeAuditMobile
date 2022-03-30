@@ -1,4 +1,4 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.Model;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

@@ -3,15 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_add_class.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_add_semester.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_check_progress.xml" value="0.25" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_check_progress2.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_main_menu.xml" value="0.1" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_menu.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/activity_new_user.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/content_check_progress.xml" value="0.16" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_check_progress_child_item.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_check_progress_group_item.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_course_number_list.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_login_form.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_requirements.xml" value="0.1" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_signup_form.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/fragment_signup_form1.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/main_menu.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/req.xml" value="0.1381340579710145" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/layout/round_btn.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/JBonds/Documents/SP22/CSE5236/DA/app/src/main/res/menu/popup_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

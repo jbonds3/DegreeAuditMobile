@@ -1,4 +1,4 @@
-package cse5236.degreeauditmobile;
+package cse5236.degreeauditmobile.Model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

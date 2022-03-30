@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/proBtn"
+        android:title="@string/progress_button"/>
+    <item
+        android:id="@+id/addSembutton"
+        android:title="@string/add_semester_button" />
+
+    <item
+        android:id="@+id/editSembutton"
+        android:title="@string/edit_semester_button" />
+
+</menu>

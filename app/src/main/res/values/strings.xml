@@ -1,5 +1,8 @@
 <resources>
+    <!--  App Name -->
     <string name="app_name">DegreeAuditMobile</string>
+
+    <!--  Login Form  -->
     <string name="signInText">Sign In</string>
     <string name="passwordText">Password</string>
     <string name="loginSubmitBtnText">Submit</string>
@@ -8,9 +11,9 @@
     <string name="oldPasswordText">Enter your current password</string>
     <string name="newPasswordText">Enter new password</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--  Main Menu Activity -->
     <string name="welcome">Welcome, User!</string>
-    <string name="progress_button">Check My Progress</string>
+    <string name="progress_button">Check Progress</string>
     <string name="add_semester_button">Add New Semester</string>
     <string name="edit_semester_button">Edit Existing Semester</string>
     <string name="edit_account_info_button">Edit Account Information</string>
@@ -18,12 +21,29 @@
     <string name="add_semester_toast">User wanted to add semester</string>
     <string name="edit_semester_toast">User wanted to edit semester</string>
     <string name="edit_account_info_toast">User wanted to edit account information</string>
+
+    <!--  Check Progress Activity  -->
+    <string name="check_progress_text">Check Progress</string>
+    <string name="check_GPA">GPA</string>
+
+    <!--  Forgot Password  -->
     <string name="incorrect_password_toast">Incorrect password!</string>
     <string name="username_not_found_toast">User with that name does not exist!</string>
+
+    <!--  Account Creation  -->
     <string name="username_already_exists_toast">This username is already taken! Please choose a different one.</string>
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="newUserButtonText">Create new user</string>\
     <string name="new_user_text">New account registration</string>
+    <string name="title_activity_check_progress">CheckProgressActivity</string>
 
+    <!--  Add Semester  -->
+    <string name="academicYearText">Academic Year</string>
+    <string name="next">Next</string>
+
+    <!-- Add Class   -->
+    <string name="departmentText">Department</string>
+    <string name="courseNumberText">Course Number</string>
+    <string name="add">Add</string>
 
 </resources>
