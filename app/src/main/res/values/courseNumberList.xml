@@ -3,5 +3,6 @@
     <string-array name="CSECourseNumber_array">
         <item>Course Number</item>
         <item>1223</item>
+        <item>2221</item>
     </string-array>
 </resources>

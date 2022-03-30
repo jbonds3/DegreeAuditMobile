@@ -1,14 +1,21 @@
 package cse5236.degreeauditmobile.UI.DAObjects;
 
+import android.os.Build;
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.RequiresApi;
+
+import static java.lang.Double.NaN;
+
 
 public class Class {
 
     private final String department;
     private final String courseNumber;
-    private final int credit;
-    private final List<Class> prereqs;
-    private final double grade;
+    private int credit;
+    private List<Class> prereqs;
+    private double grade = NaN;
 
     //requirement satisfied
 //    private final boolean engrCoreReq;
@@ -21,11 +28,27 @@ public class Class {
         this.courseNumber = courseNumber;
         this.credit = credit;
         this.prereqs = prereqs;
-        this.grade = grade;
 //        this.engrCoreReq = engrCoreReq;
 //        this.majorReq = majorReq;
 //        this.geReq = geReq;
 //        this.teReq = teReq;
+    }
+
+    public Class(String department, String courseNumber) {
+        this.department = department;
+        this.courseNumber = courseNumber;
+
+        if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
+            this.credit = 3;
+            this.prereqs = null;
+        } else if (this.department.equals("CSE") && this.courseNumber.equals("2221")) {
+            this.credit = 4;
+            this.prereqs = null;
+        } else {
+            this.credit = 0;
+            this.prereqs = null;
+        }
+
     }
 
     public String getDepartment() {
@@ -48,4 +71,19 @@ public class Class {
         return grade;
     }
 
+    public String title() {
+        return department + " " + courseNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean retVal = false;
+
+        if (obj instanceof Class) {
+            Class c = (Class) obj;
+            retVal = (c.department.equals(this.department) && c.courseNumber.equals(this.courseNumber));
+        }
+
+        return retVal;
+    }
 }

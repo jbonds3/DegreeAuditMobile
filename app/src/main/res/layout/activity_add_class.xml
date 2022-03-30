@@ -13,7 +13,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
         android:text=""
-        android:textSize="36dp"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/departmentText"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="@+id/academicYearClassTV"
         app:layout_constraintTop_toBottomOf="@+id/academicYearClassTV" />
@@ -33,7 +33,8 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/departmentTV"
-        app:layout_constraintTop_toBottomOf="@+id/departmentTV" />
+        app:layout_constraintTop_toBottomOf="@+id/departmentTV"
+        android:contentDescription="@string/departmentText"/>
 
     <Spinner
         android:id="@+id/courseNumberSpinner"
@@ -41,36 +42,27 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/courseNumberTV"
-        app:layout_constraintTop_toBottomOf="@+id/courseNumberTV" />
+        app:layout_constraintTop_toBottomOf="@+id/courseNumberTV"
+        android:contentDescription="@string/courseNumberText"/>
 
     <Button
-        android:id="@+id/addClassToSem"
+        android:id="@+id/addClassToSemBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Button"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="@+id/courseNumberSpinner"
         app:layout_constraintTop_toBottomOf="@+id/courseNumberSpinner" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/backToMainMenuBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="140dp"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/addClassToSem" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="201dp"
-        android:layout_height="265dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addClassToSem" />
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addClassToSemBtn" />
 
     <TextView
         android:id="@+id/courseNumberTV"
@@ -78,10 +70,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/courseNumberText"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/departmentSpinner"
         app:layout_constraintTop_toBottomOf="@+id/departmentSpinner" />
 
+    <ScrollView
+        android:layout_width="239dp"
+        android:layout_height="275dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/courseNumberText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addClassToSemBtn"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:id="@+id/LLinSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,5 +44,6 @@
     <!-- Add Class   -->
     <string name="departmentText">Department</string>
     <string name="courseNumberText">Course Number</string>
+    <string name="add">Add</string>
 
 </resources>
