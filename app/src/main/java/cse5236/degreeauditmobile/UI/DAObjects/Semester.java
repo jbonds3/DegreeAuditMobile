@@ -1,6 +1,7 @@
 package cse5236.degreeauditmobile.UI.DAObjects;
 
 import java.util.List;
+import cse5236.degreeauditmobile.Model.Class;
 
 public class Semester {
 

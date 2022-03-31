@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().build();;
+                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();;
         userDao = db.userDao();
 
         newUserButton = findViewById(R.id.newUserButton);

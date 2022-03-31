@@ -62,13 +62,18 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 String checkProgressStr = getString(R.string.check_progress_text);
                 String addSemesterStr = getString(R.string.add_semester_button);
+                String editAccountInfoStr = getString(R.string.edit_account_info_button);
 
-                if (menuItem.getTitle() == checkProgressStr) {
+                if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
                     startActivity(checkProgressIntent);
-                } else if (menuItem.getTitle() == addSemesterStr) {
+                } else if (menuItem.getTitle().equals(addSemesterStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
                     startActivity(checkProgressIntent);
+                } else if (menuItem.getTitle().equals(editAccountInfoStr)) {
+                    Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
+                    updatePasswordIntent.putExtra("username", username);
+                    startActivity(updatePasswordIntent);
                 } else {
                     // Toast message on menu item clicked
                     Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
