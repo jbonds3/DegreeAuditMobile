@@ -11,4 +11,12 @@
         android:id="@+id/editSembutton"
         android:title="@string/edit_semester_button" />
 
+    <item
+        android:id="@+id/editAccountInfo"
+        android:title="@string/edit_account_info_button" />
+
+    <item
+        android:id="@+id/logoutAccount"
+        android:title="@string/logout_account_button" />
+
 </menu>

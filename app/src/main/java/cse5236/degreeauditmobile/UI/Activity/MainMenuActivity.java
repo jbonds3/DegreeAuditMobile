@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button mMainMenuBtn;
 
     private String username;
+    private Context LoginActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +64,23 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 String checkProgressStr = getString(R.string.check_progress_text);
                 String addSemesterStr = getString(R.string.add_semester_button);
+                String editAccountInfoStr = getString(R.string.edit_account_info_button);
+                String logoutAccountStr = getString(R.string.logout_account_button);
 
-                if (menuItem.getTitle() == checkProgressStr) {
+                if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
                     startActivity(checkProgressIntent);
-                } else if (menuItem.getTitle() == addSemesterStr) {
+                } else if (menuItem.getTitle().equals(addSemesterStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
                     startActivity(checkProgressIntent);
+                } else if (menuItem.getTitle().equals(editAccountInfoStr)) {
+                    Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
+                    updatePasswordIntent.putExtra("username", username);
+                    startActivity(updatePasswordIntent);
+                } else if (menuItem.getTitle().equals(logoutAccountStr)) {
+                    Intent logoutAccountIntent = new Intent(MainMenuActivity.this,LoginActivity.class);
+                    logoutAccountIntent.putExtra("username", "Logged Out");
+                    startActivity(logoutAccountIntent);
                 } else {
                     // Toast message on menu item clicked
                     Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();

@@ -1,10 +1,6 @@
 package cse5236.degreeauditmobile.UI.DAObjects;
 
-import android.os.Build;
-import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.RequiresApi;
 
 import static java.lang.Double.NaN;
 
