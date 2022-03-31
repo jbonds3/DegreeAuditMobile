@@ -21,6 +21,7 @@
     <string name="add_semester_toast">User wanted to add semester</string>
     <string name="edit_semester_toast">User wanted to edit semester</string>
     <string name="edit_account_info_toast">User wanted to edit account information</string>
+    <string name="logout_account_button">Logout</string>
 
     <!--  Check Progress Activity  -->
     <string name="check_progress_text">Check Progress</string>

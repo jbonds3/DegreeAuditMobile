@@ -21,13 +21,23 @@ public class LoginActivity extends AppCompatActivity {
     private com.google.android.material.textfield.TextInputEditText passwordText;
     private AppDatabase db;
     private UserDao userDao;
+    private String logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_login);
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("logout")) {
+            logout = myIntent.getStringExtra("logout");
+        } else {
+            logout = "";
+        }
 
+        if (!logout.isEmpty()) {
+            Toast.makeText(LoginActivity.this, logout, Toast.LENGTH_SHORT).show();
+        }
         // LOGIN BTN
         loginSubmitBtn = (Button) findViewById(R.id.loginSubmitBtn);
 
@@ -73,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart() called");
+
     }
     @Override
     public void onResume() {

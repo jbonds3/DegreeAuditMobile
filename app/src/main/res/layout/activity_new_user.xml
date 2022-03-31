@@ -11,27 +11,27 @@
         android:id="@+id/newUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="60dp"
         android:layout_marginBottom="36dp"
         android:fontFamily="serif"
+        android:maxWidth="250dp"
         android:text="@string/new_user_text"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/inputFormLL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/inputFormLL"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="328dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="324dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/newUserText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/usernameTextIET"
@@ -39,27 +39,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:hint="@string/signInText"
+            android:inputType="text"
+            android:maxLines="1"
             android:minHeight="48dp"
             app:layout_constraintBottom_toTopOf="@id/passwordTextIET"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="DuplicateSpeakableTextCheck"
-            android:maxLines="1"
-            android:inputType="text" />
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordTextIET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/passwordText"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:minHeight="48dp"
             android:textColorHint="#757575"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="400dp"
-            android:maxLines="1"
-            android:inputType="textPassword" />
+            tools:layout_editor_absoluteY="400dp" />
 
 
     </LinearLayout>
