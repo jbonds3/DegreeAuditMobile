@@ -9,8 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.PopupMenu;
 
+import java.util.Iterator;
+import java.util.ListIterator;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
+import cse5236.degreeauditmobile.Model.Semester;
+import cse5236.degreeauditmobile.Model.SemesterLiveData;
+import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
+import cse5236.degreeauditmobile.UI.Fragment.MainMenuFragement;
 
 public class MainMenuActivity extends AppCompatActivity {
     private static final String TAG = "MAIN_MENU_ACTIVITY";
@@ -24,6 +33,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private String username;
     private Context LoginActivity;
+    public SemestersViewModel mSemestersViewModel;
+    private MutableLiveData<Semester> mCurrSem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +54,14 @@ public class MainMenuActivity extends AppCompatActivity {
         welcome = welcome.concat(username);
         mWelcomeTextView.setText(welcome);
 
-//        mEditAccountInfoButton = findViewById(R.id.edit_account_info_button);
-//        mEditAccountInfoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
-//                updatePasswordIntent.putExtra("username", username);
-//                startActivity(updatePasswordIntent);
-//            }
-//        });
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, MainMenuFragement.class, null)
+                    .commit();
+        }
+
+
 
         //main menu popup btn
         mMainMenuBtn = findViewById(R.id.main_menu_btn);
@@ -91,6 +101,25 @@ public class MainMenuActivity extends AppCompatActivity {
             // Showing the popup menu
             popupMenu.show();
         });
+
+//        Intent i = getIntent();
+//        String x ="";
+//        if (myIntent.hasExtra("SEMESTER")) {
+//            x = i.getStringExtra("SEMESTER");
+//        } else {
+//            x = "nope";
+//        }
+
+
+
+//        mSemestersViewModel.getAllClass().observe(this, classes -> {
+//            if (classes.size() < 1) {
+//                semText.setText("No");
+//            } else {
+//                semText.setText(String.valueOf(classes.get(0).courseNumber + "\n"));
+//            }
+//        });
+
 
     }
 

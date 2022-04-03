@@ -1,10 +1,16 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import cse5236.degreeauditmobile.Model.Semester;
+import cse5236.degreeauditmobile.Model.Class;
+import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +19,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddSemesterActivity extends AppCompatActivity implements OnItemSelectedListener {
 
@@ -24,7 +36,9 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
     private ArrayAdapter<CharSequence> sessionAdapter;
     private Spinner yearSpinner;
     private ArrayAdapter<CharSequence> yearAdapter;
+    private SemestersViewModel mSemestersViewModel;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +63,52 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
         sessionSpinner.setOnItemSelectedListener(this);
         yearSpinner.setOnItemSelectedListener(this);
 
+        mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
+        TextView addSemDis = findViewById(R.id.addSemTVDisplay);
+        mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+            String s = "";
+            for (Semester semt : semesters) {
+                s += semt.semesterID + "\n";
+            }
+            addSemDis.setText(s);
+
+        });
+
         //navigation btn to Add Class Activity
         addSemToAddClassBtn = (Button) findViewById(R.id.addSemToAddClassBtn);
 
         addSemToAddClassBtn.setOnClickListener(v -> {
-            Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
-            Bundle extras = new Bundle();
-            extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
-            extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
-            addClassIntent.putExtras(extras);
-            startActivity(addClassIntent);
+//            mSemestersViewModel.deleteAllClasses();
+
+            List<Class> classList = new ArrayList<>();
+            Semester semesterToAdd = new Semester(sessionSpinner.getSelectedItem().toString(), yearSpinner.getSelectedItem().toString(), classList);
+
+
+//            mSemestersViewModel.deleteAllSemesters();
+//            mSemestersViewModel.deleteAllClasses();
+            mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+//                if (!mSemestersViewModel.containsSemester(semesterToAdd)) {
+                List<String> semIDList = semesters.stream().map(Semester::getSemesterID).collect(Collectors.toList());
+                boolean x = false;
+                if (!semIDList.contains(semesterToAdd.getSemesterID())) {
+                    mSemestersViewModel.insert(semesterToAdd);
+                    Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
+                    extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
+                    extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());
+                    addClassIntent.putExtras(extras);
+                    startActivity(addClassIntent);
+                    x = true;
+                } else {
+                    if (x) {
+                        x = false;
+                    } else {
+                        Toast.makeText(AddSemesterActivity.this, "Semester Already Made", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         });
     }
 

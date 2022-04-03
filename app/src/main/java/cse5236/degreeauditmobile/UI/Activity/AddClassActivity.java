@@ -1,10 +1,15 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
+import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.Class;
-import cse5236.degreeauditmobile.UI.DAObjects.Semester;
+import cse5236.degreeauditmobile.Model.Semester;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddClassActivity extends AppCompatActivity {
     private static final String TAG = "THE AddClass Activity";
@@ -35,6 +41,8 @@ public class AddClassActivity extends AppCompatActivity {
     private Button mBackToMainMenuBtn;
     private List<Class> mClassList;
     private Semester mSemester;
+    private SemestersViewModel mSemestersViewModel;
+    private MutableLiveData<Semester> currSem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,9 +130,11 @@ public class AddClassActivity extends AppCompatActivity {
 
         LinearLayout l = (LinearLayout) findViewById(R.id.LLinSV);
 
+        mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
+
         mAddClassToSemBtn.setOnClickListener(v -> {
-            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString());
-            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
+            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText);
+//            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
 
             if (!mClassList.contains(classToAdd)) {
                 mClassList.add(classToAdd);
@@ -140,12 +150,29 @@ public class AddClassActivity extends AppCompatActivity {
             mDepartmentSpinner.setSelection(0);
             mCourseNumberSpinner.setSelection(0);
 
+
+            mSemestersViewModel.insert(classToAdd);
+
         });
+
 
         mBackToMainMenuBtn.setOnClickListener(v -> {
             Intent addClassIntent = new Intent(AddClassActivity.this, MainMenuActivity.class);
-            mSemester = new Semester(mSession, Integer.parseInt(mYear), mClassList);
-//            addClassIntent.putExtra("SEMESTER", mSemester);
+            mSemester = new Semester(mSession, mYear, mClassList);
+////            addClassIntent.putExtra("SEMESTER", mSemester);
+//
+//            if (mSemester.equals(null)) {
+//                addClassIntent.putExtra("SEMESTER", "eNull");
+//            } else if (mSemester == null) {
+//                addClassIntent.putExtra("SEMESTER", "rNull");
+//            } else {
+//                mSemestersViewModel.setSemester(mSemester);
+//
+//                addClassIntent.putExtra("SEMESTER", mSemestersViewModel.getFirstSem().getValue().getSession());
+//            }
+
+//            addClassIntent.putExtra("SEMESTER", String.valueOf(t));
+
             startActivity(addClassIntent);
         });
     }
