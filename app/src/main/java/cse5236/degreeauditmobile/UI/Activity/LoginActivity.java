@@ -3,6 +3,7 @@ package cse5236.degreeauditmobile.UI.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.Model.DatabaseSingleton;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
 
@@ -67,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
         });
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();;
+        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
         userDao = db.userDao();
 
         newUserButton = findViewById(R.id.newUserButton);

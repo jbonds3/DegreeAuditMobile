@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.Model.DatabaseSingleton;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -37,8 +38,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             username = "User";
         }
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().build();;
+        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
         userDao = db.userDao();
 
         updateSubmitBtn = (Button) findViewById(R.id.updateSubmitBtn);

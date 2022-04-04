@@ -43,16 +43,6 @@ public class MainMenuActivity extends AppCompatActivity {
         welcome = welcome.concat(username);
         mWelcomeTextView.setText(welcome);
 
-//        mEditAccountInfoButton = findViewById(R.id.edit_account_info_button);
-//        mEditAccountInfoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
-//                updatePasswordIntent.putExtra("username", username);
-//                startActivity(updatePasswordIntent);
-//            }
-//        });
-
         //main menu popup btn
         mMainMenuBtn = findViewById(R.id.main_menu_btn);
         mMainMenuBtn.setOnClickListener(v -> {
