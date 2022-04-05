@@ -107,7 +107,11 @@ public class MainMenuFragement extends Fragment {
 
                 mSemestersViewModel.getSemClasses(semesters.get(0)).observe(getViewLifecycleOwner(), classes -> {
                     if (classes.size() > 0) {
-                        classMMTV.setText(classes.get(0).title());
+                        String classListStr = "";
+                        for (Class c : classes) {
+                            classListStr += c.title() + "\n";
+                        }
+                        classMMTV.setText(classListStr);
                     } else {
                         classMMTV.setText("No Classes");
                     }

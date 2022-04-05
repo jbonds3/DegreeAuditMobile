@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="CSECourses_array">
+        <item>Courses</item>
+        <item>CSE 1223</item>
+        <item>CSE 2221</item>
+        <item>CSE 2321</item>
+    </string-array>
+</resources>
