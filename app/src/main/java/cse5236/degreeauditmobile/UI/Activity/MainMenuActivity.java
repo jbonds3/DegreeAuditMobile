@@ -25,10 +25,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private static final String TAG = "MAIN_MENU_ACTIVITY";
 
     private TextView mWelcomeTextView;
-//    private Button mAddSemesterButton;
-//    private Button mEditSemesterButton;
-//    private Button mEditAccountInfoButton;
-//    private Button mProgressButton;
     private Button mMainMenuBtn;
 
     private String username;
