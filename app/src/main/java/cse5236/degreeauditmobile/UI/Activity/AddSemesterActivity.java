@@ -86,28 +86,35 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
 
 //            mSemestersViewModel.deleteAllSemesters();
 //            mSemestersViewModel.deleteAllClasses();
-            mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+
+            if (!mSemestersViewModel.containsSemester(semesterToAdd)) {
+                mSemestersViewModel.insert(semesterToAdd);
+                Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
+                extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
+                extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());
+                addClassIntent.putExtras(extras);
+                startActivity(addClassIntent);
+            } else {
+                Toast.makeText(AddSemesterActivity.this, "Semester Already Made", Toast.LENGTH_SHORT).show();
+            }
+//            mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+//                List<String> semIDList = semesters.stream().map(Semester::getSemesterID).collect(Collectors.toList());
+//                if (!semIDList.contains(semesterToAdd.getSemesterID())) {
 //                if (!mSemestersViewModel.containsSemester(semesterToAdd)) {
-                List<String> semIDList = semesters.stream().map(Semester::getSemesterID).collect(Collectors.toList());
-                boolean x = false;
-                if (!semIDList.contains(semesterToAdd.getSemesterID())) {
-                    mSemestersViewModel.insert(semesterToAdd);
-                    Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
-                    Bundle extras = new Bundle();
-                    extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
-                    extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
-                    extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());
-                    addClassIntent.putExtras(extras);
-                    startActivity(addClassIntent);
-                    x = true;
-                } else {
-                    if (x) {
-                        x = false;
-                    } else {
-                        Toast.makeText(AddSemesterActivity.this, "Semester Already Made", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+//                    mSemestersViewModel.insert(semesterToAdd);
+//                    Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
+//                    Bundle extras = new Bundle();
+//                    extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
+//                    extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
+//                    extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());
+//                    addClassIntent.putExtras(extras);
+//                    startActivity(addClassIntent);
+//                } else {
+//                    Toast.makeText(AddSemesterActivity.this, "Semester Already Made", Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
         });
     }

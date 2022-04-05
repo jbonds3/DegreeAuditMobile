@@ -23,7 +23,12 @@ public class SemesterRepo {
     public LiveData<List<Semester>> getAllSemester() { return mAllSemester;}
 
     public LiveData<Semester> getSemByID(Semester semester) {
-        return mSemesterDao.findBySemesterID(semester.getSemesterID());
+        LiveData<Semester> retSem = mSemesterDao.findBySemesterID(semester.getSemesterID());
+        return retSem;
+    }
+
+    public boolean hasSemByID(Semester semester) {
+        return mSemesterDao.hasEntry(semester.getSemesterID());
     }
 
     public LiveData<List<Class>> getClassesBySemID(Semester semester) {
@@ -35,10 +40,14 @@ public class SemesterRepo {
                 mSemesterDao.insert(semester));
     }
 
+    public LiveData<Semester> getSemesterbySemID(String semesterID) {
+        return mSemesterDao.findBySemesterID(semesterID);
+    }
     public void delete(Semester semester) {
         AppDatabase.databaseWriteExecutor.submit(() ->
                 mSemesterDao.delete(semester));
     }
+
 
     private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
         private SemesterDao mAsyncTaskDao;

@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DegreeAuditMobile">
         <activity
+            android:name=".UI.Activity.EditSemesterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.EditClassActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.Activity.AddClassActivity"
             android:exported="false" />
         <activity

@@ -57,6 +57,10 @@ public class SemestersViewModel extends AndroidViewModel {
         return mSemesterRepo.getSemByID(semester);
     }
 
+    public LiveData<Semester> getSemesterbySemID(String semesterID) {
+        return mSemesterRepo.getSemesterbySemID(semesterID);
+    }
+
     public LiveData<List<Semester>> getAllSemester() {
         return mAllSemester;
     }
@@ -72,14 +76,15 @@ public class SemestersViewModel extends AndroidViewModel {
     public void deleteAllSemesters() {mSemesterRepo.deleteAll();}
 
     public boolean containsSemester(Semester semester) {
-        boolean semesterInList = false;
+        boolean semesterInList = mSemesterRepo.hasSemByID(semester);
 
-        LiveData<Semester> semesterFromTable = mSemesterRepo.getSemByID(semester);
-        Semester semesterFromTableValue = semesterFromTable.getValue();
+//        boolean semesterFromTable = mSemesterRepo.hasSemByID(semester);
+//        Semester semesterFromTableValue = semesterFromTable.getValue();
 
-        if (semesterFromTableValue != null && semesterFromTableValue.getSemesterID().equals(semester.getSemesterID())) {
-            semesterInList = true;
-        }
+
+//        if (semesterFromTable != null && semesterFromTable.getSemesterID().equals(semester.getSemesterID())) {
+//                semesterInList = true;
+//        }
 
         return semesterInList;
     }

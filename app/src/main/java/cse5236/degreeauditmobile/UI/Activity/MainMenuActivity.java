@@ -34,7 +34,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private String username;
     private Context LoginActivity;
     public SemestersViewModel mSemestersViewModel;
-    private MutableLiveData<Semester> mCurrSem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     .commit();
         }
 
-
+        mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
 
         //main menu popup btn
         mMainMenuBtn = findViewById(R.id.main_menu_btn);
@@ -76,6 +75,8 @@ public class MainMenuActivity extends AppCompatActivity {
                 String addSemesterStr = getString(R.string.add_semester_button);
                 String editAccountInfoStr = getString(R.string.edit_account_info_button);
                 String logoutAccountStr = getString(R.string.logout_account_button);
+                String deleteStr = getString(R.string.delete_sem_class_button);
+                String editSemesterStr = getString(R.string.edit_semester_button);
 
                 if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
@@ -91,6 +92,16 @@ public class MainMenuActivity extends AppCompatActivity {
                     Intent logoutAccountIntent = new Intent(MainMenuActivity.this,LoginActivity.class);
                     logoutAccountIntent.putExtra("username", "Logged Out");
                     startActivity(logoutAccountIntent);
+                } else if (menuItem.getTitle().equals(deleteStr)) {
+                    mSemestersViewModel.deleteAllSemesters();
+                    mSemestersViewModel.deleteAllClasses();
+                    Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                } else if (menuItem.getTitle().equals(editSemesterStr)) {
+                    Intent editSemesterIntent = new Intent(MainMenuActivity.this,EditSemesterActivity.class);
+                    startActivity(editSemesterIntent);
                 } else {
                     // Toast message on menu item clicked
                     Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();

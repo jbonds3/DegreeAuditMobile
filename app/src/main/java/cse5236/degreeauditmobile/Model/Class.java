@@ -47,6 +47,9 @@ public class Class {
         } else if (this.department.equals("CSE") && this.courseNumber.equals("2221")) {
             this.credit = 4;
 //            this.prereqs = null;
+        } else if (this.department.equals("CSE") && this.courseNumber.equals("2321")) {
+            this.credit = 3;
+//            this.prereqs = null;
         } else {
             this.credit = 0;
 //            this.prereqs = null;
@@ -54,18 +57,22 @@ public class Class {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Class(String title) {
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Class(String title, String semesterParentID) {
         String[] titleStr = title.split(" ");
         this.department = titleStr[0];
         this.courseNumber = titleStr[1];
-        this.courseID = String.join("", titleStr);
+        this.courseID = titleStr[0]+titleStr[1];
+        this.semesterParentID = semesterParentID;
 
         if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
             this.credit = 3;
 //            this.prereqs = null;
         } else if (this.department.equals("CSE") && this.courseNumber.equals("2221")) {
             this.credit = 4;
+//            this.prereqs = null;
+        } else if (this.department.equals("CSE") && this.courseNumber.equals("2321")) {
+            this.credit = 3;
 //            this.prereqs = null;
         } else {
             this.credit = 0;

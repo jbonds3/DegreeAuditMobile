@@ -19,7 +19,7 @@ public class ClassListConverter {
 
         if (classList.size() > 1) {
             for (String c : classStrList) {
-                classList.add(new Class(c));
+                classList.add(new Class(c, "none"));
             }
         }
 
