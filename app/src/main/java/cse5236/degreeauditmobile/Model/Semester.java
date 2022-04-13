@@ -13,10 +13,9 @@ import cse5236.degreeauditmobile.Model.Class;
 
 import cse5236.degreeauditmobile.Model.ClassListConverter;
 
-@Entity(tableName = "Semester")
+@Entity(tableName = "Semester", primaryKeys = {"SemesterID", "username"})
 public class Semester {
 
-    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "SemesterID")
     public String semesterID;
@@ -27,6 +26,7 @@ public class Semester {
     @ColumnInfo(name = "Year")
     public String year;
 
+    @NonNull
     @ColumnInfo(name = "username")
     public String username;
 

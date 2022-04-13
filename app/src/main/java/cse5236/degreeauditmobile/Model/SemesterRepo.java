@@ -35,7 +35,7 @@ public class SemesterRepo {
 
 
     public boolean hasSemByID(Semester semester) {
-        return mSemesterDao.hasEntry(semester.getSemesterID());
+        return mSemesterDao.hasEntry(semester.getSemesterID(), semester.username);
     }
 
     public LiveData<List<Class>> getClassesBySemID(Semester semester) {

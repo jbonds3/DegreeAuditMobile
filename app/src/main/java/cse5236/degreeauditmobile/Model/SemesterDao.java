@@ -32,8 +32,8 @@ public interface SemesterDao {
     String getYear(String year);
 
     //if semester
-    @Query("SELECT EXISTS(SELECT * FROM Semester WHERE SemesterID = :semesterID)")
-    boolean hasEntry(String semesterID);
+    @Query("SELECT EXISTS(SELECT * FROM Semester WHERE SemesterID = :semesterID AND username = :username)")
+    boolean hasEntry(String semesterID, String username);
 
     //insert semester into table
     @Insert(onConflict = OnConflictStrategy.REPLACE)

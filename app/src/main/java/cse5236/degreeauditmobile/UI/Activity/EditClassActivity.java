@@ -28,6 +28,7 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
     private SemestersViewModel mSemestersViewModel;
     private String mAcademicYearText;
     private ArrayAdapter<CharSequence> editDeleteClassAdapter;
+    private String mUsername;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,13 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
 
         Bundle bundle = getIntent().getExtras();
         mAcademicYearText = bundle.getString("SEMESTERPID");
+        mUsername = bundle.getString("USERNAME");
 
 
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
         TextView editClassDisplayTV = findViewById(R.id.editDisplayClassesTV);
 
-        mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+        mSemestersViewModel.getSemestersByUsername(mUsername).observe(this, semesters -> {
             Semester currSem = null;
 
             for (Semester sem : semesters) {
@@ -83,6 +85,7 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
             mSemestersViewModel.delete(classToDelete);
             Intent intent = getIntent();
             finish();
+            intent.putExtra("username", mUsername);
             startActivity(intent);
         });
 
@@ -93,12 +96,14 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
             mSemestersViewModel.insert(classToAdd);
             Intent intent = getIntent();
             finish();
+            intent.putExtra("username", mUsername);
             startActivity(intent);
         });
 
         Button editNextPage = findViewById(R.id.editNextPage);
         editNextPage.setOnClickListener(v -> {
             Intent intent = new Intent(EditClassActivity.this, MainMenuActivity.class);
+            intent.putExtra("username", mUsername);
             startActivity(intent);
         });
 

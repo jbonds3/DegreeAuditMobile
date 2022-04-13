@@ -52,7 +52,7 @@ public class AddClassActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
 
         Bundle bundle = getIntent().getExtras();
-        mUsername = bundle.getString("USERNAME");
+        mUsername = bundle.getString("username");
         mSession = bundle.getString("SESSION");
         mYear = bundle.getString("YEAR");
         mAcademicYearText += bundle.getString("SESSION") + bundle.getString("YEAR");
@@ -160,6 +160,7 @@ public class AddClassActivity extends AppCompatActivity {
 
         mBackToMainMenuBtn.setOnClickListener(v -> {
             Intent addClassIntent = new Intent(AddClassActivity.this, MainMenuActivity.class);
+            addClassIntent.putExtra("username", mUsername);
             mSemester = new Semester(mSession, mYear, mClassList, mUsername);
 ////            addClassIntent.putExtra("SEMESTER", mSemester);
 //

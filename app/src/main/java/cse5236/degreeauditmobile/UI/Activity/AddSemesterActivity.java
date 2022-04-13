@@ -73,7 +73,7 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
 
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
         TextView addSemDis = findViewById(R.id.addSemTVDisplay);
-        mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+        mSemestersViewModel.getSemestersByUsername(mUsername).observe(this, semesters -> {
             String s = "";
             for (Semester semt : semesters) {
                 s += semt.semesterID + "\n";
@@ -99,7 +99,7 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
                 mSemestersViewModel.insert(semesterToAdd);
                 Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
                 Bundle extras = new Bundle();
-                extras.putString("USERNAME", mUsername);
+                extras.putString("username", mUsername);
                 extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
                 extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
                 extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());

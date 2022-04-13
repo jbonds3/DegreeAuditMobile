@@ -59,7 +59,7 @@ public class MainMenuFragement extends Fragment {
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        args.putString("USERNAME", username);
+        args.putString("username", username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,7 +70,7 @@ public class MainMenuFragement extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            mUsername = getArguments().getString("USERNAME");
+            mUsername = getArguments().getString("username");
         }
     }
 

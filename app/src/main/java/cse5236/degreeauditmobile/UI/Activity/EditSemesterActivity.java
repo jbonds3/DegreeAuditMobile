@@ -33,12 +33,20 @@ public class EditSemesterActivity extends AppCompatActivity implements AdapterVi
     private Spinner yearSpinner;
     private ArrayAdapter<CharSequence> yearAdapter;
     private SemestersViewModel mSemestersViewModel;
+    private String mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_semester);
         Log.d(TAG, "onCreate() called");
+
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("username")) {
+            mUsername = myIntent.getStringExtra("username");
+        } else {
+            mUsername = "User";
+        }
 
         //spinners views
         sessionSpinner = (Spinner) findViewById(R.id.editSessionSpinner);
@@ -60,7 +68,7 @@ public class EditSemesterActivity extends AppCompatActivity implements AdapterVi
 
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
         TextView addSemDis = findViewById(R.id.editSemTVDisplay);
-        mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+        mSemestersViewModel.getSemestersByUsername(mUsername).observe(this, semesters -> {
             String s = "";
             for (Semester semt : semesters) {
                 s += semt.semesterID + "\n";
@@ -76,6 +84,7 @@ public class EditSemesterActivity extends AppCompatActivity implements AdapterVi
             extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
             extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
             extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());
+            extras.putString("USERNAME", mUsername);
             editClassIntent.putExtras(extras);
             startActivity(editClassIntent);
         });

@@ -27,7 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private TextView mWelcomeTextView;
     private Button mMainMenuBtn;
 
-    private String username;
+    private String mUsername;
     private Context LoginActivity;
     public SemestersViewModel mSemestersViewModel;
 
@@ -39,18 +39,18 @@ public class MainMenuActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("username")) {
-            username = myIntent.getStringExtra("username");
+            mUsername = myIntent.getStringExtra("username");
         } else {
-            username = "User";
+            mUsername = "User";
         }
-        Log.d(TAG,username);
+        Log.d(TAG,mUsername);
         mWelcomeTextView = findViewById(R.id.welcome_text_view);
         String welcome = "Welcome, ";
-        welcome = welcome.concat(username);
+        welcome = welcome.concat(mUsername);
         mWelcomeTextView.setText(welcome);
 
         Bundle bundle = new Bundle();
-        bundle.putString("USERNAME", username);
+        bundle.putString("username", mUsername);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
@@ -78,15 +78,15 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
-                    checkProgressIntent.putExtra("username", username);
+                    checkProgressIntent.putExtra("username", mUsername);
                     startActivity(checkProgressIntent);
                 } else if (menuItem.getTitle().equals(addSemesterStr)) {
                     Intent addSemesterIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
-                    addSemesterIntent.putExtra("username", username);
+                    addSemesterIntent.putExtra("username", mUsername);
                     startActivity(addSemesterIntent);
                 } else if (menuItem.getTitle().equals(editAccountInfoStr)) {
                     Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
-                    updatePasswordIntent.putExtra("username", username);
+                    updatePasswordIntent.putExtra("username", mUsername);
                     startActivity(updatePasswordIntent);
                 } else if (menuItem.getTitle().equals(logoutAccountStr)) {
                     Intent logoutAccountIntent = new Intent(MainMenuActivity.this,LoginActivity.class);
@@ -101,6 +101,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (menuItem.getTitle().equals(editSemesterStr)) {
                     Intent editSemesterIntent = new Intent(MainMenuActivity.this,EditSemesterActivity.class);
+                    editSemesterIntent.putExtra("username", mUsername);
                     startActivity(editSemesterIntent);
                 } else {
                     // Toast message on menu item clicked
