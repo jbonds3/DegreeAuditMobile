@@ -18,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,12 +92,20 @@ public class CheckProgressActivity extends AppCompatActivity {
                     count[0] = count[0] + 1;
                     if (count[0] == semesters.size()) {
                         double credits = 0;
+                        double major_credits = 0;
+                        double major_gpa = 0;
                         double gpa = 0;
                         for (int k = 0; k < completed.size(); k++) {
                             credits += completed.get(k).credit;
                             gpa += completed.get(k).credit * Helper.classLetterToNumber(completed.get(k).grade);
+                            if (completed.get(k).department.equals("CSE")) {
+                                major_credits += completed.get(k).credit;
+                                major_gpa += completed.get(k).credit * Helper.classLetterToNumber(completed.get(k).grade);
+                            }
                         }
+                        final DecimalFormat df = new DecimalFormat("0.00");
                         gpa = gpa/credits;
+                        major_gpa = major_gpa/major_credits;
                         TableRow row = (TableRow) mGPATable.getChildAt(0);
                         TextView creditsTV = (TextView) row.getChildAt(1);
                         creditsTV.setText(Double.toString(credits));
@@ -104,10 +113,12 @@ public class CheckProgressActivity extends AppCompatActivity {
                         row = (TableRow) mGPATable.getChildAt(1);
                         TextView totalTV = (TextView) row.getChildAt(1);
                         totalTV.setText(Double.toString(gpa));
+                        totalTV.setText(df.format(gpa));
 
                         row = (TableRow) mGPATable.getChildAt(2);
                         TextView majorTV = (TextView) row.getChildAt(1);
                         majorTV.setText(Double.toString(gpa));
+                        majorTV.setText(df.format(major_gpa));
 
 
                         List<ProgressRequirements> all_requirements = db.progressRequirementsDao().getAll();
