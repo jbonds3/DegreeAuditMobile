@@ -38,15 +38,16 @@ public class Class {
 //    @ColumnInfo(name = "Prerequisites")
 //    public List<Class> prereqs;
 
-//    @ColumnInfo(name = "Grade")
-//    public double grade;
+   @ColumnInfo(name = "Grade")
+    public String grade;
 
-    public Class(String department, String courseNumber, String semesterParentID, String parentUsername) {
+    public Class(String department, String courseNumber, String semesterParentID, String parentUsername, String grade) {
         this.courseID = department + courseNumber;
         this.department = department;
         this.courseNumber = courseNumber;
         this.semesterParentID = semesterParentID;
         this.parentUsername = parentUsername;
+        this.grade = grade;
 
         if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
             this.credit = 3;

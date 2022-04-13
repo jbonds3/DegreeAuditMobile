@@ -112,7 +112,7 @@ public class MainMenuFragement extends Fragment {
                     if (classes.size() > 0) {
                         String classListStr = "";
                         for (Class c : classes) {
-                            classListStr += c.title() + "\n";
+                            classListStr += c.title() + " " + c.grade + "\n";
                         }
                         classMMTV.setText(classListStr);
                     } else {
@@ -163,7 +163,7 @@ public class MainMenuFragement extends Fragment {
                     if (classes.size() > 0) {
                         String classStr = "";
                         for (Class c : classes) {
-                            classStr += c.title() + "\n";
+                            classStr += c.title() + " " + c.grade + "\n";
                         }
                         classMMTV.setText(classStr);
                     } else {
@@ -202,7 +202,7 @@ public class MainMenuFragement extends Fragment {
                     if (classes.size() > 0) {
                         String classStr = "";
                         for (Class c : classes) {
-                            classStr += c.title() + "\n";
+                            classStr += c.title() + " " + c.grade + "\n";
                         }
                         classMMTV.setText(classStr);
                     } else {

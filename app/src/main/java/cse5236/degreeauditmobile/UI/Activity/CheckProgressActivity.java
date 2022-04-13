@@ -95,7 +95,7 @@ public class CheckProgressActivity extends AppCompatActivity {
                                 for (int k = 0; k < completed.size(); k++) {
                                     String full_name = completed.get(k).getDepartment() + " " + completed.get(k).getCourseNumber();
                                     if (full_name.equals(class_name)) {
-                                        toPrint = class_name + " completed ";
+                                        toPrint = class_name + " completed " + completed.get(k).grade;
                                         break;
                                     }
                                 }

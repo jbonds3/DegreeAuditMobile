@@ -37,6 +37,8 @@ public class AddClassActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> mDepartmentAdapter;
     private Spinner mCourseNumberSpinner;
     private ArrayAdapter<CharSequence> mCSECourseNumberAdapter;
+    private Spinner mGradeSpinner;
+    private ArrayAdapter<CharSequence> mGradeAdapter;
     private Button mAddClassToSemBtn;
     private Button mBackToMainMenuBtn;
     private List<Class> mClassList;
@@ -61,6 +63,7 @@ public class AddClassActivity extends AppCompatActivity {
         mAcademicYearTV.setText(mAcademicYearText);
 
         //spinner, btn views
+        mGradeSpinner = findViewById(R.id.gradeSpinner);
         mDepartmentSpinner = (Spinner) findViewById(R.id.departmentSpinner);
         mCourseNumberSpinner = (Spinner) findViewById(R.id.courseNumberSpinner);
         mAddClassToSemBtn = findViewById(R.id.addClassToSemBtn);
@@ -121,6 +124,12 @@ public class AddClassActivity extends AppCompatActivity {
             }
         });
 
+        //grade spinner adapter
+        mGradeAdapter = ArrayAdapter.createFromResource(this, R.array.grade_array, android.R.layout.simple_spinner_item);
+        mGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mGradeSpinner.setAdapter(mGradeAdapter);
+
         //disable course number spinner and add class btn
         mCourseNumberSpinner.setEnabled(false);
         mCourseNumberSpinner.setClickable(false);
@@ -135,7 +144,7 @@ public class AddClassActivity extends AppCompatActivity {
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
 
         mAddClassToSemBtn.setOnClickListener(v -> {
-            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText, mUsername);
+            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText, mUsername, mGradeSpinner.getSelectedItem().toString());
 //            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
 
             if (!mClassList.contains(classToAdd)) {

@@ -49,6 +49,7 @@
     <string name="departmentText">Department</string>
     <string name="courseNumberText">Course Number</string>
     <string name="add">Add</string>
+    <string name="gradeText">Add a grade</string>
 
     <!--  Edit Semester  -->
     <string name="editSemesterStr">Edit Semester</string>
