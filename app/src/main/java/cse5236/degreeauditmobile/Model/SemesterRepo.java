@@ -31,15 +31,12 @@ public class SemesterRepo {
         return semesterList;
     }
 
-
-
-
     public boolean hasSemByID(Semester semester) {
         return mSemesterDao.hasEntry(semester.getSemesterID(), semester.username);
     }
 
     public LiveData<List<Class>> getClassesBySemID(Semester semester) {
-        return mSemesterDao.getClassesFromSemesterID(semester.getSemesterID());
+        return mSemesterDao.getClassesFromSemester(semester.getSemesterID(), semester.username);
     }
 
     public void insert(Semester semester) {

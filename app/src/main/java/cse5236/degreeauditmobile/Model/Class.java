@@ -11,10 +11,11 @@ import androidx.room.PrimaryKey;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
+@Entity(primaryKeys = {"courseID", "SemesterParentID", "ParentUsername"})
 public class Class {
 
-    @PrimaryKey @NonNull
+    @NonNull
+    @ColumnInfo(name = "courseID")
     public String courseID;
 
     @ColumnInfo(name = "Department")
@@ -26,8 +27,13 @@ public class Class {
     @ColumnInfo(name = "Credit")
     public int credit;
 
+    @NonNull
     @ColumnInfo(name = "SemesterParentID")
     public String semesterParentID;
+
+    @NonNull
+    @ColumnInfo(name = "ParentUsername")
+    public String parentUsername;
 
 //    @ColumnInfo(name = "Prerequisites")
 //    public List<Class> prereqs;
@@ -35,11 +41,12 @@ public class Class {
 //    @ColumnInfo(name = "Grade")
 //    public double grade;
 
-    public Class(String department, String courseNumber, String semesterParentID) {
+    public Class(String department, String courseNumber, String semesterParentID, String parentUsername) {
         this.courseID = department + courseNumber;
         this.department = department;
         this.courseNumber = courseNumber;
         this.semesterParentID = semesterParentID;
+        this.parentUsername = parentUsername;
 
         if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
             this.credit = 3;
@@ -58,12 +65,13 @@ public class Class {
     }
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Class(String title, String semesterParentID) {
+    public Class(String title, String semesterParentID, String username) {
         String[] titleStr = title.split(" ");
         this.department = titleStr[0];
         this.courseNumber = titleStr[1];
         this.courseID = titleStr[0]+titleStr[1];
         this.semesterParentID = semesterParentID;
+        this.parentUsername = username;
 
         if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
             this.credit = 3;

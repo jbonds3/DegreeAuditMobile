@@ -49,7 +49,7 @@ public interface SemesterDao {
     void deleteAll();
 
     @Transaction
-    @Query("SELECT * FROM Class WHERE SemesterParentID = :semesterID")
-    public LiveData<List<Class>> getClassesFromSemesterID(String semesterID);
+    @Query("SELECT * FROM Class WHERE SemesterParentID = :semesterID AND ParentUsername = :username")
+    public LiveData<List<Class>> getClassesFromSemester(String semesterID, String username);
 
 }

@@ -135,7 +135,7 @@ public class AddClassActivity extends AppCompatActivity {
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
 
         mAddClassToSemBtn.setOnClickListener(v -> {
-            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText);
+            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText, mUsername);
 //            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
 
             if (!mClassList.contains(classToAdd)) {
