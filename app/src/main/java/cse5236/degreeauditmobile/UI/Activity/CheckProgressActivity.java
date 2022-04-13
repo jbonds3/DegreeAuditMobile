@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+import cse5236.degreeauditmobile.Model.Helper;
 import cse5236.degreeauditmobile.Model.ProgressRequirements;
 import cse5236.degreeauditmobile.Model.RequirementClass;
 import cse5236.degreeauditmobile.Model.Semester;
@@ -58,6 +61,7 @@ public class CheckProgressActivity extends AppCompatActivity {
     private TextView mRequirementsTextView;
     private SemestersViewModel mSemestersViewModel;
     private String mUsername;
+    private TableLayout mGPATable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class CheckProgressActivity extends AppCompatActivity {
             mUsername = "User";
         }
 
+        mGPATable = findViewById(R.id.gpaTable);
+
         mSemestersViewModel.getSemestersByUsername(mUsername).observe(this, semesters -> {
             List<Class> completed = new ArrayList<>();
             int count[] = new int[1];
@@ -84,12 +90,32 @@ public class CheckProgressActivity extends AppCompatActivity {
                     completed.addAll(classes);
                     count[0] = count[0] + 1;
                     if (count[0] == semesters.size()) {
+                        double credits = 0;
+                        double gpa = 0;
+                        for (int k = 0; k < completed.size(); k++) {
+                            credits += completed.get(k).credit;
+                            gpa += completed.get(k).credit * Helper.classLetterToNumber(completed.get(k).grade);
+                        }
+                        gpa = gpa/credits;
+                        TableRow row = (TableRow) mGPATable.getChildAt(0);
+                        TextView creditsTV = (TextView) row.getChildAt(1);
+                        creditsTV.setText(Double.toString(credits));
+
+                        row = (TableRow) mGPATable.getChildAt(1);
+                        TextView totalTV = (TextView) row.getChildAt(1);
+                        totalTV.setText(Double.toString(gpa));
+
+                        row = (TableRow) mGPATable.getChildAt(2);
+                        TextView majorTV = (TextView) row.getChildAt(1);
+                        majorTV.setText(Double.toString(gpa));
+
+
                         List<ProgressRequirements> all_requirements = db.progressRequirementsDao().getAll();
                         for (int i = 0; i < all_requirements.size(); i++) {
                             String req_name = all_requirements.get(i).requirement;
                             mRequirementsTextView.append(req_name + ":\n");
                             List<RequirementClass> current = db.requirementClassDao().findByRequirement(req_name);
-                            for(int j = 0; j < current.size(); j++) {
+                            for (int j = 0; j < current.size(); j++) {
                                 String class_name = current.get(j).className;
                                 String toPrint = class_name + " not completed yet";
                                 for (int k = 0; k < completed.size(); k++) {
@@ -130,20 +156,19 @@ public class CheckProgressActivity extends AppCompatActivity {
             }
 
 
-
         });
 
         mRequirementsTextView = findViewById(R.id.requirementsText);
 
+/*
         createGroupList();
         mCheckProgressCollection = new HashMap<>();
-        String[] x = {"MPHR", "CPHR"};
+        String[] x = {"Total:", "Major:"};
         mCheckProgressCollection.put("GPA", x);
 
         //ExpandableListView functions
         checkProgressELV = findViewById(R.id.checkProgressELV);
         checkProgressADP = new MyExpandableListAdapter(this, mGroupList, mCheckProgressCollection);
-
         checkProgressELV.setAdapter(checkProgressADP);
         checkProgressELV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int lastExpandedPos = -1;
@@ -169,4 +194,8 @@ public class CheckProgressActivity extends AppCompatActivity {
         mGroupList.add("GPA");
     }
 
+
+ */
+
+    }
 }

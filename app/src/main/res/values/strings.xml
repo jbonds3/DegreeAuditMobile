@@ -28,6 +28,9 @@
     <!--  Check Progress Activity  -->
     <string name="check_progress_text">Check Progress</string>
     <string name="check_GPA">GPA</string>
+    <string name="total_credits">Total Credits</string>
+    <string name="total_gpa">GPA</string>
+    <string name="major_gpa">Major GPA</string>
     <string name="populateRequirementsButtonText">Update Requirements</string>
 
     <!--  Forgot Password  -->
