@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {User.class, Class.class, Semester.class, ProgressRequirements.class, RequirementClass.class}, version = 6, exportSchema = false)
+@Database(entities = {User.class, Class.class, Semester.class, ProgressRequirements.class, RequirementClass.class}, version = 8, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 

@@ -36,7 +36,7 @@ public class AddClassActivity extends AppCompatActivity {
     private Spinner mDepartmentSpinner;
     private ArrayAdapter<CharSequence> mDepartmentAdapter;
     private Spinner mCourseNumberSpinner;
-    private ArrayAdapter<CharSequence> mCSECourseNumberAdapter;
+    private ArrayAdapter<CharSequence> mCourseNumberAdapter;
     private Spinner mGradeSpinner;
     private ArrayAdapter<CharSequence> mGradeAdapter;
     private Button mAddClassToSemBtn;
@@ -86,11 +86,55 @@ public class AddClassActivity extends AppCompatActivity {
 
                     Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
 
-                    mCSECourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.CSECourseNumber_array, android.R.layout.simple_spinner_item);
-                    mCSECourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mCourseNumberSpinner.setAdapter(mCSECourseNumberAdapter);
-                }
-                else if (parent.getItemAtPosition(pos).toString().equals("Major")) {
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.CSECourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("MATH")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.MATHCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("ENGR")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.ENGRCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("PHILOS")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.PHILOSCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("PHYSICS")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.PHYSICSCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("STAT")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.STATCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("Major")) {
                     mCourseNumberSpinner.setSelection(0);
                     mCourseNumberSpinner.setEnabled(false);
                     mCourseNumberSpinner.setClickable(false);

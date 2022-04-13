@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="ENGRCourseNumber_array">
+        <item>Course Number</item>
+        <item>1100</item>
+    </string-array>
+    <string-array name="PHILOSCourseNumber_array">
+        <item>Course Number</item>
+        <item>1138</item>
+    </string-array>
+    <string-array name="PHYSICSCourseNumber_array">
+        <item>Course Number</item>
+        <item>1250</item>
+    </string-array>
+    <string-array name="STATCourseNumber_array">
+        <item>Course Number</item>
+        <item>3470</item>
+    </string-array>
+    <string-array name="MATHCourseNumber_array">
+        <item>Course Number</item>
+        <item>1151</item>
+        <item>1172</item>
+        <item>2153</item>
+        <item>2255</item>
+        <item>2415</item>
+        <item>2568</item>
+        <item>3345</item>
+    </string-array>
     <string-array name="CSECourseNumber_array">
         <item>Course Number</item>
         <item>1223</item>
         <item>2221</item>
+        <item>2231</item>
         <item>2321</item>
+        <item>2331</item>
+        <item>2421</item>
+        <item>2431</item>
+        <item>2501</item>
+        <item>3231</item>
+        <item>3321</item>
+        <item>3341</item>
+        <item>3421</item>
+        <item>3461</item>
+        <item>3521</item>
+        <item>3541</item>
+        <item>3901</item>
+        <item>3902</item>
+        <item>3903</item>
+        <item>5911</item>
+        <item>5912</item>
+        <item>5913</item>
+        <item>5914</item>
+        <item>5915</item>
     </string-array>
 </resources>

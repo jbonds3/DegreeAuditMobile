@@ -5,12 +5,17 @@ import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
+import cse5236.degreeauditmobile.UI.StringUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,10 +55,21 @@ public class LoginActivity extends AppCompatActivity {
                 if (userDao.hasEntry(username)) {
                     passwordText = findViewById(R.id.passwordTextIET);
                     String enteredPassword = passwordText.getText().toString();
+
+                    //SHA-256 Password security
+                    MessageDigest digest = null;
+                    try {
+                        digest = MessageDigest.getInstance("SHA-256");
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+                    byte[] sha256HashBytes = digest.digest(enteredPassword.getBytes(StandardCharsets.UTF_8));
+                    String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
+
                     String actualPassword = userDao.getPassword(username);
 
                     // check input password match user password
-                    if (enteredPassword.equals(actualPassword)) {
+                    if (sha256HashStr.equals(actualPassword)) {
                         Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
                         mainMenuIntent.putExtra("username", username);
                         startActivity(mainMenuIntent);

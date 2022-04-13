@@ -1,7 +1,7 @@
 package cse5236.degreeauditmobile;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {

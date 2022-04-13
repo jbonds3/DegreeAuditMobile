@@ -4,6 +4,43 @@
         <item>Courses</item>
         <item>CSE 1223</item>
         <item>CSE 2221</item>
+        <item>CSE 2231</item>
         <item>CSE 2321</item>
+        <item>CSE 2331</item>
+        <item>CSE 2421</item>
+        <item>CSE 2431</item>
+        <item>CSE 2501</item>
+        <item>CSE 3231</item>
+        <item>CSE 3321</item>
+        <item>CSE 3341</item>
+        <item>CSE 3421</item>
+        <item>CSE 3461</item>
+        <item>CSE 3521</item>
+        <item>CSE 3541</item>
+        <item>CSE 3901</item>
+        <item>CSE 3902</item>
+        <item>CSE 3903</item>
+        <item>CSE 5911</item>
+        <item>CSE 5912</item>
+        <item>CSE 5913</item>
+        <item>CSE 5914</item>
+        <item>CSE 5915</item>
+
+        <item>ENGR 1100</item>
+
+        <item>PHILOS 1138</item>
+
+        <item>PHYSICS 1250</item>
+        <item>PHYSICS 3470</item>
+
+        <item>MATH 1151</item>
+        <item>MATH 1172</item>
+        <item>MATH 2153</item>
+        <item>MATH 2255</item>
+        <item>MATH 2415</item>
+        <item>MATH 2568</item>
+        <item>MATH 3345</item>
+
+        <item>STAT 3470</item>
     </string-array>
 </resources>

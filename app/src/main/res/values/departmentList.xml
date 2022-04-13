@@ -3,6 +3,11 @@
     <string-array name="department_array">
         <item>Major</item>
         <item>CSE</item>
+        <item>ENGR</item>
+        <item>MATH</item>
+        <item>PHILOS</item>
+        <item>PHYSICS</item>
+        <item>STAT</item>
     </string-array>
 
     <string-array name="grade_array">

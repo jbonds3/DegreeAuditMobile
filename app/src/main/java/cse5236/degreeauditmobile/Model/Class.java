@@ -49,19 +49,8 @@ public class Class {
         this.parentUsername = parentUsername;
         this.grade = grade;
 
-        if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
-            this.credit = 3;
-//            this.prereqs = null;
-        } else if (this.department.equals("CSE") && this.courseNumber.equals("2221")) {
-            this.credit = 4;
-//            this.prereqs = null;
-        } else if (this.department.equals("CSE") && this.courseNumber.equals("2321")) {
-            this.credit = 3;
-//            this.prereqs = null;
-        } else {
-            this.credit = 0;
-//            this.prereqs = null;
-        }
+        String[] creditPrereqsArray = ClassID.classID(this.department, this.courseNumber);
+        this.credit = Integer.parseInt(creditPrereqsArray[0]);
 
     }
 
@@ -75,19 +64,8 @@ public class Class {
         this.parentUsername = username;
         this.grade = grade;
 
-        if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
-            this.credit = 3;
-//            this.prereqs = null;
-        } else if (this.department.equals("CSE") && this.courseNumber.equals("2221")) {
-            this.credit = 4;
-//            this.prereqs = null;
-        } else if (this.department.equals("CSE") && this.courseNumber.equals("2321")) {
-            this.credit = 3;
-//            this.prereqs = null;
-        } else {
-            this.credit = 0;
-//            this.prereqs = null;
-        }
+        String[] creditPrereqsArray = ClassID.classID(this.department, this.courseNumber);
+        this.credit = Integer.parseInt(creditPrereqsArray[0]);
 
     }
 

@@ -9,12 +9,17 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import androidx.room.Room;
 
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
+import cse5236.degreeauditmobile.UI.StringUtils;
 
 public class NewUserActivity extends AppCompatActivity {
     private static final String TAG = "Create_New_User";
@@ -31,7 +36,7 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         userDao = db.userDao();
 
         // CREATE USER BTN
@@ -49,7 +54,18 @@ public class NewUserActivity extends AppCompatActivity {
                 } else {
                     passwordText = findViewById(R.id.passwordTextIET);
                     String password = passwordText.getText().toString();
-                    User toAdd = new User(username, password);
+
+                    //SHA-256 Password security
+                    MessageDigest digest = null;
+                    try {
+                        digest = MessageDigest.getInstance("SHA-256");
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+                    byte[] sha256HashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                    String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
+
+                    User toAdd = new User(username, sha256HashStr);
                     userDao.insertAll(toAdd);
 
                     // Start intent to main menu
