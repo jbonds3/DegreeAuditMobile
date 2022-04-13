@@ -7,12 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
+import cse5236.degreeauditmobile.UI.StringUtils;
 
 public class UpdatePasswordActivity extends AppCompatActivity {
     private static final String TAG = "Update_Password";
@@ -49,10 +54,31 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                 String entered_old_password = oldPasswordText.getText().toString();
 
                 String actualPassword = userDao.getPassword(username);
-                if (entered_old_password.equals(actualPassword)) {
+
+                //SHA-256 Password security
+                MessageDigest digest = null;
+                try {
+                    digest = MessageDigest.getInstance("SHA-256");
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                byte[] sha256HashBytes = digest.digest(entered_old_password.getBytes(StandardCharsets.UTF_8));
+                String sha256HashStrOP = StringUtils.bytesToHex(sha256HashBytes);
+
+                if (actualPassword.equals(sha256HashStrOP)) {
                     newPasswordText = findViewById(R.id.newPasswordTextIET);
                     String new_password = newPasswordText.getText().toString();
-                    User updatedUser = new User(username, new_password);
+
+                    digest = null;
+                    try {
+                        digest = MessageDigest.getInstance("SHA-256");
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+                    sha256HashBytes = digest.digest(new_password.getBytes(StandardCharsets.UTF_8));
+                    String sha256HashStrNP = StringUtils.bytesToHex(sha256HashBytes);
+
+                    User updatedUser = new User(username, sha256HashStrNP);
                     userDao.UpdatePassword(updatedUser);
                     Intent mainMenuIntent = new Intent(UpdatePasswordActivity.this,MainMenuActivity.class);
                     mainMenuIntent.putExtra("username", username);
