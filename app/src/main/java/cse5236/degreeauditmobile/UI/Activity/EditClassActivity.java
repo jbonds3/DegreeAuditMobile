@@ -28,6 +28,8 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
     private SemestersViewModel mSemestersViewModel;
     private String mAcademicYearText;
     private ArrayAdapter<CharSequence> editDeleteClassAdapter;
+    private Spinner mGradeSpinner;
+    private ArrayAdapter<CharSequence> mGradeAdapter;
     private String mUsername;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -66,22 +68,26 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
         });
 
         Spinner editClassSpinner = (Spinner) findViewById(R.id.editClassList);
+        Spinner mGradeSpinner = findViewById(R.id.editClassGradeSpinner);
 
         //spinner adapters
         editDeleteClassAdapter = ArrayAdapter.createFromResource(this, R.array.CSECourses_array, android.R.layout.simple_spinner_item);
-//
+        mGradeAdapter = ArrayAdapter.createFromResource(this, R.array.grade_array, android.R.layout.simple_spinner_item);
 //        editDeleteClassAdapter.clear();
 //        editDeleteClassAdapter.addAll(mSemestersViewModel.getSemClasses(currSemester).getValue().stream().map(Class::));
 
         editDeleteClassAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         editClassSpinner.setAdapter(editDeleteClassAdapter);
         editClassSpinner.setOnItemSelectedListener(this);
 
+        mGradeSpinner.setAdapter(mGradeAdapter);
+
         Button editDeleteClassButton = findViewById(R.id.editDeleteClass);
         editDeleteClassButton.setOnClickListener(v -> {
             String classToDeleteStr = editClassSpinner.getSelectedItem().toString();
-            Class classToDelete = new Class(classToDeleteStr, mAcademicYearText, mUsername);
+            Class classToDelete = new Class(classToDeleteStr, mAcademicYearText, mUsername, "");
             mSemestersViewModel.delete(classToDelete);
             Intent intent = getIntent();
             finish();
@@ -92,7 +98,8 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
         Button editAddClassButton = findViewById(R.id.editAddClass);
         editAddClassButton.setOnClickListener(v -> {
             String classToDeleteStr = editClassSpinner.getSelectedItem().toString();
-            Class classToAdd = new Class(classToDeleteStr, mAcademicYearText, mUsername);
+            String grade = mGradeSpinner.getSelectedItem().toString();
+            Class classToAdd = new Class(classToDeleteStr, mAcademicYearText, mUsername, grade);
             mSemestersViewModel.insert(classToAdd);
             Intent intent = getIntent();
             finish();

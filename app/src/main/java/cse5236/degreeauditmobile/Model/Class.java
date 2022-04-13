@@ -66,13 +66,14 @@ public class Class {
     }
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Class(String title, String semesterParentID, String username) {
+    public Class(String title, String semesterParentID, String username, String grade) {
         String[] titleStr = title.split(" ");
         this.department = titleStr[0];
         this.courseNumber = titleStr[1];
         this.courseID = titleStr[0]+titleStr[1];
         this.semesterParentID = semesterParentID;
         this.parentUsername = username;
+        this.grade = grade;
 
         if (this.department.equals("CSE") && this.courseNumber.equals("1223")) {
             this.credit = 3;

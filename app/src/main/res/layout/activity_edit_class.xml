@@ -25,11 +25,20 @@
         app:layout_constraintStart_toStartOf="@+id/editDisplayClassesTV"
         app:layout_constraintTop_toBottomOf="@+id/editDisplayClassesTV" />
 
+    <Spinner
+        android:id="@+id/editClassGradeSpinner"
+        android:layout_width="271dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/editDisplayClassesTV"
+        app:layout_constraintTop_toBottomOf="@+id/editClassList" />
+
     <Button
         android:id="@+id/editDeleteClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="100dp"
         android:text="@string/editDeleteClassText"
         app:layout_constraintStart_toStartOf="@+id/editClassList"
         app:layout_constraintTop_toBottomOf="@+id/editClassList" />
