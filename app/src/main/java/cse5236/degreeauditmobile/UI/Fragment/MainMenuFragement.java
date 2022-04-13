@@ -38,6 +38,7 @@ public class MainMenuFragement extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mUsername;
     private SemestersViewModel mSemestersViewModel;
 
     public MainMenuFragement() {
@@ -53,11 +54,12 @@ public class MainMenuFragement extends Fragment {
      * @return A new instance of fragment MainMenuFragement.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainMenuFragement newInstance(String param1, String param2) {
+    public static MainMenuFragement newInstance(String param1, String param2, String username) {
         MainMenuFragement fragment = new MainMenuFragement();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString("USERNAME", username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +70,7 @@ public class MainMenuFragement extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mUsername = getArguments().getString("USERNAME");
         }
     }
 
@@ -93,7 +96,7 @@ public class MainMenuFragement extends Fragment {
 
         Button nextBtn = getView().findViewById(R.id.nextBtnMM);
 
-        mSemestersViewModel.getAllSemester().observe(getViewLifecycleOwner(), semesters -> {
+        mSemestersViewModel.getSemestersByUsername(mUsername).observe(getViewLifecycleOwner(), semesters -> {
 
             if (semesters.size() > 0) {
                 ListIterator<String> semesterIT = semesters.stream().map(Semester::getSemesterID).collect(Collectors.toList()).listIterator();

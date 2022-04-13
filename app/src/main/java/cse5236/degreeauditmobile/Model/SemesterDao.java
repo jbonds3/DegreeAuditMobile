@@ -16,6 +16,9 @@ public interface SemesterDao {
     @Query("SELECT * FROM Semester")
     LiveData<List<Semester>> getAll();
 
+    @Query("SELECT * FROM Semester WHERE username = :username")
+    LiveData<List<Semester>> getByUser(String username);
+
     //get a semester
     @Query("SELECT * FROM Semester WHERE SemesterID LIKE :semesterID")
     LiveData<Semester> findBySemesterID(String semesterID);

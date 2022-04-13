@@ -27,15 +27,19 @@ public class Semester {
     @ColumnInfo(name = "Year")
     public String year;
 
+    @ColumnInfo(name = "username")
+    public String username;
+
     @TypeConverters(ClassListConverter.class)
     private List<Class> classes;
 
 
-    public Semester(String session, String year, List<Class> classes) {
+    public Semester(String session, String year, List<Class> classes, String username) {
         this.semesterID = session+year;
         this.session = session;
         this.year = year;
         this.classes = (classes);
+        this.username = username;
     }
 
     public String getSemesterID() {

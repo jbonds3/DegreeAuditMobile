@@ -31,7 +31,7 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().build();;
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
         userDao = db.userDao();
 
         // CREATE USER BTN

@@ -37,6 +37,7 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
     private Spinner yearSpinner;
     private ArrayAdapter<CharSequence> yearAdapter;
     private SemestersViewModel mSemestersViewModel;
+    private String mUsername;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,6 +45,13 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
         Log.d(TAG, "onCreate() called");
+
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("username")) {
+            mUsername = myIntent.getStringExtra("username");
+        } else {
+            mUsername = "User";
+        }
 
         //spinners views
         sessionSpinner = (Spinner) findViewById(R.id.sessionSpinner);
@@ -81,7 +89,7 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
 //            mSemestersViewModel.deleteAllClasses();
 
             List<Class> classList = new ArrayList<>();
-            Semester semesterToAdd = new Semester(sessionSpinner.getSelectedItem().toString(), yearSpinner.getSelectedItem().toString(), classList);
+            Semester semesterToAdd = new Semester(sessionSpinner.getSelectedItem().toString(), yearSpinner.getSelectedItem().toString(), classList, mUsername);
 
 
 //            mSemestersViewModel.deleteAllSemesters();
@@ -91,6 +99,7 @@ public class AddSemesterActivity extends AppCompatActivity implements OnItemSele
                 mSemestersViewModel.insert(semesterToAdd);
                 Intent addClassIntent = new Intent(AddSemesterActivity.this,AddClassActivity.class);
                 Bundle extras = new Bundle();
+                extras.putString("USERNAME", mUsername);
                 extras.putString("SESSION", sessionSpinner.getSelectedItem().toString());
                 extras.putString("YEAR", yearSpinner.getSelectedItem().toString());
                 extras.putString("SEMESTERPID", sessionSpinner.getSelectedItem().toString()+yearSpinner.getSelectedItem().toString());

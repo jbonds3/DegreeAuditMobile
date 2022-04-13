@@ -49,10 +49,12 @@ public class MainMenuActivity extends AppCompatActivity {
         welcome = welcome.concat(username);
         mWelcomeTextView.setText(welcome);
 
+        Bundle bundle = new Bundle();
+        bundle.putString("USERNAME", username);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, MainMenuFragement.class, null)
+                    .add(R.id.fragment_container_view, MainMenuFragement.class, bundle)
                     .commit();
         }
 
@@ -76,10 +78,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
+                    checkProgressIntent.putExtra("username", username);
                     startActivity(checkProgressIntent);
                 } else if (menuItem.getTitle().equals(addSemesterStr)) {
-                    Intent checkProgressIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
-                    startActivity(checkProgressIntent);
+                    Intent addSemesterIntent = new Intent(MainMenuActivity.this,AddSemesterActivity.class);
+                    addSemesterIntent.putExtra("username", username);
+                    startActivity(addSemesterIntent);
                 } else if (menuItem.getTitle().equals(editAccountInfoStr)) {
                     Intent updatePasswordIntent = new Intent(MainMenuActivity.this,UpdatePasswordActivity.class);
                     updatePasswordIntent.putExtra("username", username);

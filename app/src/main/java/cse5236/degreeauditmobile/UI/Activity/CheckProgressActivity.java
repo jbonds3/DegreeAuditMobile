@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 
@@ -56,6 +57,7 @@ public class CheckProgressActivity extends AppCompatActivity {
     private AppDatabase db;
     private TextView mRequirementsTextView;
     private SemestersViewModel mSemestersViewModel;
+    private String mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,14 @@ public class CheckProgressActivity extends AppCompatActivity {
         db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
 
-        mSemestersViewModel.getAllSemester().observe(this, semesters -> {
+        Intent myIntent = getIntent();
+        if (myIntent.hasExtra("username")) {
+            mUsername = myIntent.getStringExtra("username");
+        } else {
+            mUsername = "User";
+        }
+
+        mSemestersViewModel.getSemestersByUsername(mUsername).observe(this, semesters -> {
             List<Class> completed = new ArrayList<>();
             int count[] = new int[1];
             count[0] = 0;
@@ -119,6 +128,8 @@ public class CheckProgressActivity extends AppCompatActivity {
                 RequirementClass reqclass1 = new RequirementClass(req2, "CSE 2321");
                 db.requirementClassDao().insert(reqclass1);
             }
+
+
 
         });
 

@@ -61,6 +61,10 @@ public class SemestersViewModel extends AndroidViewModel {
         return mSemesterRepo.getSemesterbySemID(semesterID);
     }
 
+    public LiveData<List<Semester>> getSemestersByUsername(String username) {
+        return mSemesterRepo.getSemestersByUser(username);
+    }
+
     public LiveData<List<Semester>> getAllSemester() {
         return mAllSemester;
     }
