@@ -14,8 +14,7 @@ public class SemesterRepo {
     private final LiveData<List<Semester>> mAllSemester;
 
     public SemesterRepo(Application application) {
-        AppDatabase db = Room.databaseBuilder(application,
-                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        AppDatabase db = DatabaseSingleton.getDatabaseInstance("App_Database", application);
         mSemesterDao = db.semesterDao();
         mAllSemester = mSemesterDao.getAll();
     }

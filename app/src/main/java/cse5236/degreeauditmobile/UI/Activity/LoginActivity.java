@@ -2,6 +2,7 @@ package cse5236.degreeauditmobile.UI.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.Model.DatabaseSingleton;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -20,8 +21,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity {
-    final long recentTimer = 600000;
-    final long timeout = 600000;
+    final long recentTimer = 300000;
+    final long timeout = 300000;
     final int maxAttempts = 5;
 
     private static final String TAG = "THE Login Activity";
@@ -89,8 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             long lastAttempt = currentUser.timeStamp;
                             currentUser.timeStamp = currentTimeStamp;
-                            // 600000 milliseconds = 10 minutes
-                            if (lastAttempt - currentTimeStamp < 600000) {
+                            if (lastAttempt - currentTimeStamp < recentTimer) {
                                 currentUser.recentIncorrectAttempts = currentUser.recentIncorrectAttempts + 1;
                             } else {
                                 currentUser.recentIncorrectAttempts = 1;
@@ -106,8 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
         });
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
         userDao = db.userDao();
 
         newUserButton = findViewById(R.id.newUserButton);

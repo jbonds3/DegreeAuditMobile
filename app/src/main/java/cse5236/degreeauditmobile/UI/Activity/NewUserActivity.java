@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import androidx.room.Room;
 
 import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.Model.DatabaseSingleton;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -35,8 +36,7 @@ public class NewUserActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_new_user);
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
         userDao = db.userDao();
 
         // CREATE USER BTN

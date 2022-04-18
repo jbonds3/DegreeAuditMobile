@@ -15,8 +15,7 @@ public class ClassRepo {
     private final LiveData<List<Class>> mAllClass;
 
     public ClassRepo(Application application) {
-        AppDatabase db = Room.databaseBuilder(application,
-                AppDatabase.class, "database-name").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        AppDatabase db = DatabaseSingleton.getDatabaseInstance("App_Database", application);
         mClassDao = db.classDao();
         mAllClass = mClassDao.getAll();
     }
