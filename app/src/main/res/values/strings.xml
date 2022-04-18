@@ -61,4 +61,8 @@
     <string name="editDeleteClassText">Delete</string>
     <string name="editAddClassText">Add</string>
 
+    <!--  Update password  -->
+    <string name="DarkModeButtonText">Switch to dark theme</string>
+    <string name="DefaultModeButtonText">Switch to default theme</string>
+
 </resources>

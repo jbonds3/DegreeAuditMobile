@@ -1,5 +1,8 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.R;
@@ -22,7 +26,7 @@ import cse5236.degreeauditmobile.UI.StringUtils;
 public class UpdatePasswordActivity extends AppCompatActivity {
     private static final String TAG = "Update_Password";
     private Button updateSubmitBtn;
-    private Button deleteUserButton;
+    private Button mSwitchModeButton;
     private com.google.android.material.textfield.TextInputEditText oldPasswordText;
     private com.google.android.material.textfield.TextInputEditText newPasswordText;
     private String username;
@@ -91,14 +95,25 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             }
         });
 
-        deleteUserButton = findViewById(R.id.deleteUserButton);
-        deleteUserButton.setOnClickListener(new View.OnClickListener() {
+        mSwitchModeButton = findViewById(R.id.switchModeButton);
+        int text;
+        if (AppCompatDelegate.getDefaultNightMode() == MODE_NIGHT_YES) {
+            text = R.string.DefaultModeButtonText;
+        } else {
+            text = R.string.DarkModeButtonText;
+        }
+        mSwitchModeButton.setText(text);
+        mSwitchModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User toDelete = userDao.findByName(username);
-                userDao.delete(toDelete);
-                Intent LoginIntent = new Intent(UpdatePasswordActivity.this,LoginActivity.class);
-                startActivity(LoginIntent);
+                int currentMode = AppCompatDelegate.getDefaultNightMode();
+                if (currentMode == MODE_NIGHT_YES) {
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+                    mSwitchModeButton.setText(R.string.DarkModeButtonText);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+                    mSwitchModeButton.setText(R.string.DefaultModeButtonText);
+                }
             }
         });
 
