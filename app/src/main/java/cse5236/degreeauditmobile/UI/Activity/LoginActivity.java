@@ -1,8 +1,8 @@
 package cse5236.degreeauditmobile.UI.Activity;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
+import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
 import cse5236.degreeauditmobile.UI.StringUtils;
@@ -16,8 +16,13 @@ import android.widget.Toast;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
+import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity {
+    final long recentTimer = 600000;
+    final long timeout = 600000;
+    final int maxAttempts = 5;
 
     private static final String TAG = "THE Login Activity";
     private Button loginSubmitBtn;
@@ -53,34 +58,52 @@ public class LoginActivity extends AppCompatActivity {
 
                 // if user in Room database
                 if (userDao.hasEntry(username)) {
-                    passwordText = findViewById(R.id.passwordTextIET);
-                    String enteredPassword = passwordText.getText().toString();
-
-                    //SHA-256 Password security
-                    MessageDigest digest = null;
-                    try {
-                        digest = MessageDigest.getInstance("SHA-256");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] sha256HashBytes = digest.digest(enteredPassword.getBytes(StandardCharsets.UTF_8));
-                    String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
-
-                    String actualPassword = userDao.getPassword(username);
-
-                    // check input password match user password
-                    if (sha256HashStr.equals(actualPassword)) {
-                        Intent mainMenuIntent = new Intent(LoginActivity.this,MainMenuActivity.class);
-                        mainMenuIntent.putExtra("username", username);
-                        startActivity(mainMenuIntent);
+                    User currentUser = userDao.findByName(username);
+                    long currentTimeStamp = System.currentTimeMillis();
+                    if ((currentUser.recentIncorrectAttempts > maxAttempts) && (currentTimeStamp - currentUser.timeStamp < timeout)) {
+                        int message = R.string.timeout_toast;
+                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else {
-                        int message = R.string.incorrect_password_toast;
+                        passwordText = findViewById(R.id.passwordTextIET);
+                        String enteredPassword = passwordText.getText().toString();
+
+                        //SHA-256 Password security
+                        MessageDigest digest = null;
+                        try {
+                            digest = MessageDigest.getInstance("SHA-256");
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        }
+                        byte[] sha256HashBytes = digest.digest(enteredPassword.getBytes(StandardCharsets.UTF_8));
+                        String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
+
+                        String actualPassword = currentUser.password;
+
+                        // check input password match user password
+                        if (sha256HashStr.equals(actualPassword)) {
+                            currentUser.recentIncorrectAttempts = 0;
+                            userDao.UpdateUser(currentUser);
+                            Intent mainMenuIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                            mainMenuIntent.putExtra("username", username);
+                            startActivity(mainMenuIntent);
+                        } else {
+                            long lastAttempt = currentUser.timeStamp;
+                            currentUser.timeStamp = currentTimeStamp;
+                            // 600000 milliseconds = 10 minutes
+                            if (lastAttempt - currentTimeStamp < 600000) {
+                                currentUser.recentIncorrectAttempts = currentUser.recentIncorrectAttempts + 1;
+                            } else {
+                                currentUser.recentIncorrectAttempts = 1;
+                            }
+                            userDao.UpdateUser(currentUser);
+                            int message = R.string.incorrect_password_toast;
+                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    } else{
+                        int message = R.string.username_not_found_toast;
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    int message = R.string.username_not_found_toast;
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
         });
 
         db = Room.databaseBuilder(getApplicationContext(),

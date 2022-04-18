@@ -10,6 +10,7 @@
     <string name="deleteUserButtonText">Self-Destroy</string>
     <string name="oldPasswordText">Enter your current password</string>
     <string name="newPasswordText">Enter new password</string>
+    <string name="timeout_toast">This user is temporarily blocked!</string>
 
     <!--  Main Menu Activity -->
     <string name="welcome">Welcome, User!</string>

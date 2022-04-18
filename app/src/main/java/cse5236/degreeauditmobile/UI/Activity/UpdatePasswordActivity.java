@@ -83,7 +83,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                     String sha256HashStrNP = StringUtils.bytesToHex(sha256HashBytes);
 
                     User updatedUser = new User(username, sha256HashStrNP);
-                    userDao.UpdatePassword(updatedUser);
+                    userDao.UpdateUser(updatedUser);
                     Intent mainMenuIntent = new Intent(UpdatePasswordActivity.this,MainMenuActivity.class);
                     mainMenuIntent.putExtra("username", username);
                     startActivity(mainMenuIntent);
