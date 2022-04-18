@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile.Model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,8 +15,14 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> getAll();
 
+    @Query("SELECT * FROM user")
+    LiveData<List<User>> getAllLive();
+
     @Query("SELECT * FROM user WHERE userName = :username")
     User findByName(String username);
+
+    @Query("SELECT * FROM user WHERE userName = :username")
+    LiveData<User> findByNameLive(String username);
 
     @Query("SELECT password FROM user WHERE userName = :username")
     String getPassword(String username);

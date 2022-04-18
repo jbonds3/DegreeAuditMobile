@@ -1,9 +1,13 @@
 package cse5236.degreeauditmobile.UI.Activity;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
 import cse5236.degreeauditmobile.Model.User;
+import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
+import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
 import cse5236.degreeauditmobile.UI.StringUtils;
@@ -19,6 +23,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     final long recentTimer = 300000;
@@ -30,9 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button newUserButton;
     private com.google.android.material.textfield.TextInputEditText loginText;
     private com.google.android.material.textfield.TextInputEditText passwordText;
-    private AppDatabase db;
-    private UserDao userDao;
     private String logout;
+    private UsersViewModel mUsersViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                 String username = loginText.getText().toString();
 
                 // if user in Room database
-                if (userDao.hasEntry(username)) {
-                    User currentUser = userDao.findByName(username);
+                if (mUsersViewModel.contains(username)) {
+                    User currentUser = mUsersViewModel.getUserNow(username);
                     long currentTimeStamp = System.currentTimeMillis();
                     if ((currentUser.recentIncorrectAttempts > maxAttempts) && (currentTimeStamp - currentUser.timeStamp < timeout)) {
                         int message = R.string.timeout_toast;
@@ -83,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         // check input password match user password
                         if (sha256HashStr.equals(actualPassword)) {
                             currentUser.recentIncorrectAttempts = 0;
-                            userDao.UpdateUser(currentUser);
+                            mUsersViewModel.update(currentUser);
                             Intent mainMenuIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
                             mainMenuIntent.putExtra("username", username);
                             startActivity(mainMenuIntent);
@@ -95,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 currentUser.recentIncorrectAttempts = 1;
                             }
-                            userDao.UpdateUser(currentUser);
+                            mUsersViewModel.update(currentUser);
                             int message = R.string.incorrect_password_toast;
                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
@@ -106,8 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
         });
 
-        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
-        userDao = db.userDao();
+        mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
         newUserButton = findViewById(R.id.newUserButton);
         newUserButton.setOnClickListener(v -> {

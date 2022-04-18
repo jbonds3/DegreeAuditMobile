@@ -13,10 +13,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -27,8 +29,7 @@ public class NewUserActivity extends AppCompatActivity {
     private Button CreateUserButton;
     private com.google.android.material.textfield.TextInputEditText usernameText;
     private com.google.android.material.textfield.TextInputEditText passwordText;
-    private AppDatabase db;
-    private UserDao userDao;
+    private UsersViewModel mUsersViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,7 @@ public class NewUserActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_new_user);
 
-        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
-        userDao = db.userDao();
+        mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
         // CREATE USER BTN
         CreateUserButton = (Button) findViewById(R.id.createUserButton);
@@ -48,7 +48,7 @@ public class NewUserActivity extends AppCompatActivity {
                 String username = usernameText.getText().toString();
 
                 // check if username is in Room database
-                if (userDao.hasEntry(username)) {
+                if (mUsersViewModel.contains(username)) {
                     int message = R.string.username_already_exists_toast;
                     Toast.makeText(NewUserActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else {
@@ -66,7 +66,7 @@ public class NewUserActivity extends AppCompatActivity {
                     String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
 
                     User toAdd = new User(username, sha256HashStr);
-                    userDao.insertAll(toAdd);
+                    mUsersViewModel.insert(toAdd);
 
                     // Start intent to main menu
                     Intent mainMenuIntent = new Intent(NewUserActivity.this,MainMenuActivity.class);

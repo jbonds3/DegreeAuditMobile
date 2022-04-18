@@ -16,9 +16,11 @@ import java.security.NoSuchAlgorithmException;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -31,8 +33,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     private com.google.android.material.textfield.TextInputEditText oldPasswordText;
     private com.google.android.material.textfield.TextInputEditText newPasswordText;
     private String username;
-    private UserDao userDao;
-    private AppDatabase db;
+    private UsersViewModel mUsersViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             username = "User";
         }
 
-        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
-        userDao = db.userDao();
+        mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
         updateSubmitBtn = (Button) findViewById(R.id.updateSubmitBtn);
         updateSubmitBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +57,9 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                 oldPasswordText = findViewById(R.id.oldPasswordTextIET);
                 String entered_old_password = oldPasswordText.getText().toString();
 
-                String actualPassword = userDao.getPassword(username);
+                User user = mUsersViewModel.getUserNow(username);
+
+                String actualPassword = user.password;
 
                 //SHA-256 Password security
                 MessageDigest digest = null;
@@ -83,7 +85,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                     String sha256HashStrNP = StringUtils.bytesToHex(sha256HashBytes);
 
                     User updatedUser = new User(username, sha256HashStrNP);
-                    userDao.UpdateUser(updatedUser);
+                    mUsersViewModel.update(updatedUser);
                     Intent mainMenuIntent = new Intent(UpdatePasswordActivity.this,MainMenuActivity.class);
                     mainMenuIntent.putExtra("username", username);
                     startActivity(mainMenuIntent);
