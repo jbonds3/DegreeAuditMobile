@@ -2,6 +2,9 @@
 
 <TableLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TableRow android:layout_height="8dp">
