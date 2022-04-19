@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile.Model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,6 +14,9 @@ public interface ProgressRequirementsDao {
     @Query("SELECT * FROM progressrequirements")
     List<ProgressRequirements> getAll();
 
+    @Query("SELECT * FROM progressrequirements")
+    LiveData<List<ProgressRequirements>> getAllLive();
+
     @Query("SELECT * FROM progressrequirements WHERE requirement = :reqName")
     ProgressRequirements findByName(String reqName);
 
@@ -25,4 +29,7 @@ public interface ProgressRequirementsDao {
 
     @Delete
     void delete(ProgressRequirements progress);
+
+    @Update
+    void update(ProgressRequirements progress);
 }

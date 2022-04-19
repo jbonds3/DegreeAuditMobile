@@ -1,16 +1,11 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -20,28 +15,21 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import cse5236.degreeauditmobile.Model.AppDatabase;
-import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+import com.google.android.material.tabs.TabLayout;
+
 import cse5236.degreeauditmobile.Model.Helper;
 import cse5236.degreeauditmobile.Model.ProgressRequirements;
 import cse5236.degreeauditmobile.Model.RequirementClass;
-import cse5236.degreeauditmobile.Model.Semester;
+import cse5236.degreeauditmobile.Model.ViewModel.ReqToClassViewModel;
+import cse5236.degreeauditmobile.Model.ViewModel.RequirementViewModel;
 import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
-import cse5236.degreeauditmobile.UI.MyExpandableListAdapter;
 import cse5236.degreeauditmobile.Model.Class;
 
 public class CheckProgressActivity extends AppCompatActivity {
@@ -58,9 +46,10 @@ public class CheckProgressActivity extends AppCompatActivity {
     private ExpandableListView checkProgressELV;
     private ExpandableListAdapter checkProgressADP;
     private Button mUpdateRequirementsButton;
-    private AppDatabase db;
-    private TextView mRequirementsTextView;
+    private TableLayout mRequirementsTable;
     private SemestersViewModel mSemestersViewModel;
+    private ReqToClassViewModel mReqToClassViewModel;
+    private RequirementViewModel mRequirementViewModel;
     private String mUsername;
     private TableLayout mGPATable;
 
@@ -70,7 +59,8 @@ public class CheckProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_progress);
         Log.d(TAG, "onCreate() called");
 
-        db = DatabaseSingleton.getDatabaseInstance("App_Database", getApplicationContext());
+        mRequirementViewModel = new ViewModelProvider(this).get(RequirementViewModel.class);
+        mReqToClassViewModel = new ViewModelProvider(this).get(ReqToClassViewModel.class);
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
 
         Intent myIntent = getIntent();
@@ -120,26 +110,46 @@ public class CheckProgressActivity extends AppCompatActivity {
                         majorTV.setText(Double.toString(gpa));
                         majorTV.setText(df.format(major_gpa));
 
+                        final String positionToReq[] = new String[10];
+                        LiveData<List<ProgressRequirements>> all_requirements_Live = mRequirementViewModel.getAll();
+                        all_requirements_Live.observe(this, all_requirements-> {
 
-                        List<ProgressRequirements> all_requirements = db.progressRequirementsDao().getAll();
                         for (int i = 0; i < all_requirements.size(); i++) {
                             String req_name = all_requirements.get(i).requirement;
-                            mRequirementsTextView.append(req_name + ":\n");
-                            List<RequirementClass> current = db.requirementClassDao().findByRequirement(req_name);
+                            positionToReq[i] = req_name;
+                            TableLayout req_table = (TableLayout)getLayoutInflater().inflate(R.layout.table_requirement, null);
+                            TableRow req_row = (TableRow) req_table.getChildAt(0);
+                            TextView text = (TextView)req_row.getChildAt(0);
+                            text.setText(req_name);
+                            mRequirementsTable.addView(req_table);
+                            LiveData<List<RequirementClass>> current_live = mReqToClassViewModel.findByRequirement(req_name);
+                            current_live.observe(this, current -> {
                             for (int j = 0; j < current.size(); j++) {
                                 String class_name = current.get(j).className;
-                                String toPrint = class_name + " not completed yet";
+                                String completion = "not completed yet";
+                                String grade = "";
                                 for (int k = 0; k < completed.size(); k++) {
                                     String full_name = completed.get(k).getDepartment() + " " + completed.get(k).getCourseNumber();
                                     if (full_name.equals(class_name)) {
-                                        toPrint = class_name + " completed " + completed.get(k).grade;
+                                        completion = "completed";
+                                        grade = completed.get(k).grade;
                                         break;
                                     }
                                 }
-                                mRequirementsTextView.append(toPrint + "\n");
+                                TableRow class_row = (TableRow)getLayoutInflater().inflate(R.layout.class_row, null);
+                                TextView class_name_table = (TextView) class_row.getChildAt(0);
+                                TextView completed_table = (TextView) class_row.getChildAt(1);
+                                TextView grade_table = (TextView) class_row.getChildAt(2);
+                                class_name_table.setText(class_name);
+                                completed_table.setText(completion);
+                                grade_table.setText(grade);
+                                int table_number = Helper.findPosition(positionToReq, current.get(0).requirement);
+                                TableLayout thatReq = (TableLayout)mRequirementsTable.getChildAt(table_number);
+                                thatReq.addView(class_row);
                             }
-                            mRequirementsTextView.append("\n");
+                            });
                         }
+                        });
                     }
                 });
             }
@@ -150,26 +160,26 @@ public class CheckProgressActivity extends AppCompatActivity {
         mUpdateRequirementsButton.setOnClickListener(v -> {
             String req1 = "Fundamentals";
             String req2 = "Advanced";
-            if (!db.progressRequirementsDao().hasEntry(req1)) {
+            if (!mRequirementViewModel.contains(req1)) {
                 ProgressRequirements req = new ProgressRequirements(req1);
-                db.progressRequirementsDao().insert(req);
+                mRequirementViewModel.insert(req);
                 RequirementClass reqclass1 = new RequirementClass(req1, "CSE 1223");
                 RequirementClass reqclass2 = new RequirementClass(req1, "CSE 2221");
-                db.requirementClassDao().insert(reqclass1);
-                db.requirementClassDao().insert(reqclass2);
+                mReqToClassViewModel.insert(reqclass1);
+                mReqToClassViewModel.insert(reqclass2);
             }
 
-            if (!db.progressRequirementsDao().hasEntry(req2)) {
+            if (!mRequirementViewModel.contains(req2)) {
                 ProgressRequirements req = new ProgressRequirements(req2);
-                db.progressRequirementsDao().insert(req);
+                mRequirementViewModel.insert(req);
                 RequirementClass reqclass1 = new RequirementClass(req2, "CSE 2321");
-                db.requirementClassDao().insert(reqclass1);
+                mReqToClassViewModel.insert(reqclass1);
             }
 
 
         });
 
-        mRequirementsTextView = findViewById(R.id.requirementsText);
+        mRequirementsTable = findViewById(R.id.requirementsTable);
 
 /*
         createGroupList();

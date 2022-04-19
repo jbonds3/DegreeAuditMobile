@@ -26,4 +26,13 @@ public class Helper {
         return numberGrade;
 
     }
+
+    static public int findPosition(String array[], String toFind) {
+        for (int i = 0; i < array.length; i++ ) {
+            if (array[i].equals(toFind)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
