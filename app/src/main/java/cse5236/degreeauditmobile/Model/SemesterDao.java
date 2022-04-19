@@ -19,6 +19,9 @@ public interface SemesterDao {
     @Query("SELECT * FROM Semester WHERE username = :username")
     LiveData<List<Semester>> getByUser(String username);
 
+    @Query("SELECT * FROM Semester WHERE username = :username")
+    List<Semester> getByUserNow(String username);
+
     //get a semester
     @Query("SELECT * FROM Semester WHERE SemesterID LIKE :semesterID")
     LiveData<Semester> findBySemesterID(String semesterID);
@@ -51,5 +54,9 @@ public interface SemesterDao {
     @Transaction
     @Query("SELECT * FROM Class WHERE SemesterParentID = :semesterID AND ParentUsername = :username")
     public LiveData<List<Class>> getClassesFromSemester(String semesterID, String username);
+
+    @Transaction
+    @Query("SELECT * FROM Class WHERE SemesterParentID = :semesterID AND ParentUsername = :username")
+    public List<Class> getClassesFromSemesterNow(String semesterID, String username);
 
 }
