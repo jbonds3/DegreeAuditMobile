@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Activity.EditSemesterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UI.Activity.EditSemesterActivity">
+        <!--    android:background="@color/material_dynamic_secondary80"-->
+
+        <TextView
+            android:id="@+id/editAcademicYearTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="100dp"
+            android:text="@string/academicYearText"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/editSessionSpinner"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="48dp"
+            app:layout_constraintStart_toStartOf="@+id/editAcademicYearTV"
+            app:layout_constraintTop_toBottomOf="@+id/editAcademicYearTV" />
+
+        <Spinner
+            android:id="@+id/editYearSpinner"
+            android:layout_width="141dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@+id/editSessionSpinner"
+            app:layout_constraintTop_toTopOf="@+id/editSessionSpinner" />
+
+        <Button
+            android:id="@+id/editSemToAddClassBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/next"
+            app:layout_constraintEnd_toEndOf="@+id/editYearSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/editYearSpinner" />
+
+        <TextView
+            android:id="@+id/editSemTVDisplay"
+            android:layout_width="333dp"
+            android:layout_height="141dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="104dp"
+            android:text=""
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/editSessionSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/editSessionSpinner" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

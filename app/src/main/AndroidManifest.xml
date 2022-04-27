@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DegreeAuditMobile">
         <activity
+            android:name=".UI.Activity.EditSemesterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.EditClassActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.Activity.AddClassActivity"
             android:exported="false" />
         <activity
@@ -38,6 +44,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UI.Activity.GradMajorEntryActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

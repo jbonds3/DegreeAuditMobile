@@ -2,38 +2,41 @@ package cse5236.degreeauditmobile.Model;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 @Dao
 public interface ClassDao {
     @Query("SELECT * FROM class")
-    List<Class> getAll();
+    public LiveData<List<Class>> getAll();
 
     //get course
     @Query("SELECT * FROM class WHERE courseID = :courseID")
-    Class findByCourseID(String courseID);
+    public LiveData<Class> findByCourseID(String courseID);
 
     //get department
     @Query("SELECT department FROM class WHERE courseID = :courseID")
-    String getDepartment(String courseID);
+    public String getDepartment(String courseID);
 
     //get course number
     @Query("SELECT courseNumber FROM class WHERE courseID = :courseID")
-    String getCourseNumber(String courseID);
+    public String getCourseNumber(String courseID);
 
     @Query("SELECT EXISTS(SELECT * FROM class WHERE courseID = :courseID)")
-    boolean hasEntry(String courseID);
+    public boolean hasEntry(String courseID);
 
-    @Insert
-    void insertAll(Class... classes);
-
-    @Update
-    void UpdatePassword(Class c);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insert(Class classes);
 
     @Delete
-    void delete(Class c);
+    public void delete(Class c);
+
+    @Query("DELETE FROM class")
+    void deleteAll();
 }

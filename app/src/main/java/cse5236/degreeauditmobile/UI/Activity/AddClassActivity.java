@@ -1,13 +1,19 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
+import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.Class;
-import cse5236.degreeauditmobile.UI.DAObjects.Semester;
+import cse5236.degreeauditmobile.Model.Semester;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -20,6 +26,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddClassActivity extends AppCompatActivity {
     private static final String TAG = "THE AddClass Activity";
@@ -30,19 +37,31 @@ public class AddClassActivity extends AppCompatActivity {
     private Spinner mDepartmentSpinner;
     private ArrayAdapter<CharSequence> mDepartmentAdapter;
     private Spinner mCourseNumberSpinner;
-    private ArrayAdapter<CharSequence> mCSECourseNumberAdapter;
+    private ArrayAdapter<CharSequence> mCourseNumberAdapter;
+    private Spinner mGradeSpinner;
+    private ArrayAdapter<CharSequence> mGradeAdapter;
     private Button mAddClassToSemBtn;
     private Button mBackToMainMenuBtn;
     private List<Class> mClassList;
     private Semester mSemester;
+    private SemestersViewModel mSemestersViewModel;
+    private MutableLiveData<Semester> currSem;
+    private String mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_class);
         Log.d(TAG, "onCreate() called");
 
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            setContentView(R.layout.fragment_add_class_land);
+        } else {
+            setContentView(R.layout.activity_add_class);
+        }
+
         Bundle bundle = getIntent().getExtras();
+        mUsername = bundle.getString("username");
         mSession = bundle.getString("SESSION");
         mYear = bundle.getString("YEAR");
         mAcademicYearText += bundle.getString("SESSION") + bundle.getString("YEAR");
@@ -51,6 +70,7 @@ public class AddClassActivity extends AppCompatActivity {
         mAcademicYearTV.setText(mAcademicYearText);
 
         //spinner, btn views
+        mGradeSpinner = findViewById(R.id.gradeSpinner);
         mDepartmentSpinner = (Spinner) findViewById(R.id.departmentSpinner);
         mCourseNumberSpinner = (Spinner) findViewById(R.id.courseNumberSpinner);
         mAddClassToSemBtn = findViewById(R.id.addClassToSemBtn);
@@ -73,11 +93,136 @@ public class AddClassActivity extends AppCompatActivity {
 
                     Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
 
-                    mCSECourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.CSECourseNumber_array, android.R.layout.simple_spinner_item);
-                    mCSECourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mCourseNumberSpinner.setAdapter(mCSECourseNumberAdapter);
-                }
-                else if (parent.getItemAtPosition(pos).toString().equals("Major")) {
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.CSECourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("MATH")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.MATHCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("ENGR")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.ENGRCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("ENGLISH")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.ENGLISHCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("PHILOS")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.PHILOSCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("PHYSICS")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.PHYSICSCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("STAT")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.STATCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("EARTHSC")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.EARTHSCCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("COMM")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.COMMCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("RURALSOC")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.RURALSOCCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("COMPSTD")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.COMPSTDCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("AFAMAST")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.AFAMASTCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("ECE")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.ECECourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("THEATRE")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.THEATRECourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("LING")) {
+                    mCourseNumberSpinner.setEnabled(true);
+                    mCourseNumberSpinner.setClickable(true);
+
+                    Log.d(TAG, mDepartmentSpinner.getSelectedItem().toString());
+
+                    mCourseNumberAdapter = ArrayAdapter.createFromResource(AddClassActivity.this, R.array.LINGCourseNumber_array, android.R.layout.simple_spinner_item);
+                    mCourseNumberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCourseNumberSpinner.setAdapter(mCourseNumberAdapter);
+                } else if (parent.getItemAtPosition(pos).toString().equals("Major")) {
                     mCourseNumberSpinner.setSelection(0);
                     mCourseNumberSpinner.setEnabled(false);
                     mCourseNumberSpinner.setClickable(false);
@@ -111,6 +256,12 @@ public class AddClassActivity extends AppCompatActivity {
             }
         });
 
+        //grade spinner adapter
+        mGradeAdapter = ArrayAdapter.createFromResource(this, R.array.grade_array, android.R.layout.simple_spinner_item);
+        mGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mGradeSpinner.setAdapter(mGradeAdapter);
+
         //disable course number spinner and add class btn
         mCourseNumberSpinner.setEnabled(false);
         mCourseNumberSpinner.setClickable(false);
@@ -122,9 +273,11 @@ public class AddClassActivity extends AppCompatActivity {
 
         LinearLayout l = (LinearLayout) findViewById(R.id.LLinSV);
 
+        mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
+
         mAddClassToSemBtn.setOnClickListener(v -> {
-            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString());
-            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
+            Class classToAdd = new Class(mDepartmentSpinner.getSelectedItem().toString(), mCourseNumberSpinner.getSelectedItem().toString(), mAcademicYearText, mUsername, mGradeSpinner.getSelectedItem().toString());
+//            Log.d(TAG, String.valueOf(classToAdd.getCredit()));
 
             if (!mClassList.contains(classToAdd)) {
                 mClassList.add(classToAdd);
@@ -140,12 +293,16 @@ public class AddClassActivity extends AppCompatActivity {
             mDepartmentSpinner.setSelection(0);
             mCourseNumberSpinner.setSelection(0);
 
+
+            mSemestersViewModel.insert(classToAdd);
+
         });
+
 
         mBackToMainMenuBtn.setOnClickListener(v -> {
             Intent addClassIntent = new Intent(AddClassActivity.this, MainMenuActivity.class);
-            mSemester = new Semester(mSession, Integer.parseInt(mYear), mClassList);
-//            addClassIntent.putExtra("SEMESTER", mSemester);
+            addClassIntent.putExtra("username", mUsername);
+            mSemester = new Semester(mSession, mYear, mClassList, mUsername);
             startActivity(addClassIntent);
         });
     }

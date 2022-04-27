@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Activity.AddSemesterActivity">
+
+    <TextView
+        android:id="@+id/academicYearClassTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:text=""
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gradeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:text="@string/gradeText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/departmentSpinner"
+        app:layout_constraintTop_toTopOf="@+id/academicYearClassTV" />
+
+    <Spinner
+        android:id="@+id/gradeSpinner"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/gradeText"
+        app:layout_constraintStart_toStartOf="@+id/gradeTV"
+        app:layout_constraintTop_toBottomOf="@+id/gradeTV" />
+
+    <TextView
+        android:id="@+id/departmentTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/departmentText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/academicYearClassTV"
+        app:layout_constraintTop_toBottomOf="@+id/academicYearClassTV" />
+
+    <Spinner
+        android:id="@+id/departmentSpinner"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/departmentTV"
+        app:layout_constraintTop_toBottomOf="@+id/departmentTV"
+        android:contentDescription="@string/departmentText"/>
+
+    <Spinner
+        android:id="@+id/courseNumberSpinner"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/courseNumberTV"
+        app:layout_constraintTop_toBottomOf="@+id/courseNumberTV"
+        android:contentDescription="@string/courseNumberText"/>
+
+    <Button
+        android:id="@+id/addClassToSemBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/add"
+        app:layout_constraintStart_toStartOf="@+id/gradeSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/gradeSpinner" />
+
+    <Button
+        android:id="@+id/backToMainMenuBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:text="@string/next"
+        app:layout_constraintStart_toEndOf="@+id/addClassToSemBtn"
+        app:layout_constraintTop_toTopOf="@+id/addClassToSemBtn" />
+
+    <TextView
+        android:id="@+id/courseNumberTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/courseNumberText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/departmentSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/departmentSpinner" />
+
+    <ScrollView
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/courseNumberText"
+        android:fillViewport="false"
+        app:layout_constraintStart_toStartOf="@+id/addClassToSemBtn"
+        app:layout_constraintTop_toBottomOf="@+id/addClassToSemBtn">
+
+        <LinearLayout
+            android:id="@+id/LLinSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

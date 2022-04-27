@@ -14,19 +14,80 @@
         android:text="@string/check_progress_text"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ExpandableListView
-        android:id="@+id/checkProgressELV"
+    <TableLayout
+        android:id="@+id/gpaTable"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="120dp"
+        android:stretchColumns="1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:padding="3dip"
+                android:text="@string/total_credits" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="@string/total_gpa" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="@string/major_gpa" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+    </TableLayout>
+
+
+    <TableLayout
+        android:id="@+id/requirementsTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="48dp"
+        android:stretchColumns="1"
+        app:layout_constraintBottom_toTopOf="@id/populateRequirementsButton"
+        app:layout_constraintTop_toBottomOf="@id/gpaTable"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-110dp">
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/populateRequirementsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="332dp"
+        android:text="@string/populateRequirementsButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkProgressTV">
-
-
-
-    </ExpandableListView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/requirementsTable"
+        app:layout_constraintVertical_bias="0.692" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

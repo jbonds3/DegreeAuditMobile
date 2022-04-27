@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Activity.EditClassActivity">
+
+    <TextView
+        android:id="@+id/editDisplayClassesTV"
+        android:layout_width="285dp"
+        android:layout_height="247dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/editClassList"
+        android:layout_width="271dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/editDisplayClassesTV"
+        app:layout_constraintTop_toBottomOf="@+id/editDisplayClassesTV" />
+
+    <Spinner
+        android:id="@+id/editClassGradeSpinner"
+        android:layout_width="271dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/editDisplayClassesTV"
+        app:layout_constraintTop_toBottomOf="@+id/editClassList" />
+
+    <Button
+        android:id="@+id/editDeleteClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="@string/editDeleteClassText"
+        app:layout_constraintStart_toStartOf="@+id/editClassList"
+        app:layout_constraintTop_toBottomOf="@+id/editClassList" />
+
+    <Button
+        android:id="@+id/editAddClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editAddClassText"
+        app:layout_constraintEnd_toEndOf="@+id/editClassList"
+        app:layout_constraintTop_toTopOf="@+id/editDeleteClass" />
+
+    <Button
+        android:id="@+id/editNextPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="@+id/editAddClass"
+        app:layout_constraintTop_toBottomOf="@+id/editAddClass" />
+</androidx.constraintlayout.widget.ConstraintLayout>
