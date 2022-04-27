@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
+
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
 import cse5236.degreeauditmobile.UI.StringUtils;
@@ -122,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
+
 
         newUserButton = findViewById(R.id.newUserButton);
         newUserButton.setOnClickListener(v -> {

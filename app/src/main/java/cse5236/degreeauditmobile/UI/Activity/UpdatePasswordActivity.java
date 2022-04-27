@@ -21,7 +21,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+
 import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
+
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -55,7 +57,9 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             username = "User";
         }
 
+
         mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
+
 
         updateSubmitBtn = (Button) findViewById(R.id.updateSubmitBtn);
         updateSubmitBtn.setOnClickListener(new View.OnClickListener() {

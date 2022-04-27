@@ -19,7 +19,9 @@ import androidx.room.Room;
 
 import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.DatabaseSingleton;
+
 import cse5236.degreeauditmobile.Model.ViewModel.UsersViewModel;
+
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.User;
 import cse5236.degreeauditmobile.Model.UserDao;
@@ -37,6 +39,7 @@ public class NewUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
 
+
         int rotation = getWindowManager().getDefaultDisplay().getRotation();
         if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
             setContentView(R.layout.fragment_new_user_land);
@@ -45,6 +48,7 @@ public class NewUserActivity extends AppCompatActivity {
         }
 
         mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
+
 
         // CREATE USER BTN
         CreateUserButton = (Button) findViewById(R.id.createUserButton);

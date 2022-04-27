@@ -51,6 +51,7 @@ public class MainMenuActivity extends AppCompatActivity {
         welcome = welcome.concat(mUsername);
         mWelcomeTextView.setText(welcome);
 
+
         Bundle bundle = new Bundle();
         bundle.putString("username", mUsername);
         if (savedInstanceState == null) {
@@ -61,6 +62,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }
 
         mSemestersViewModel = new ViewModelProvider(this).get(SemestersViewModel.class);
+
 
         //main menu popup btn
         mMainMenuBtn = findViewById(R.id.main_menu_btn);
