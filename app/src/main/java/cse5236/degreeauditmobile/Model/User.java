@@ -28,17 +28,22 @@ class User {
     @ColumnInfo(name = "recent_incorrect_attempts")
     public int recentIncorrectAttempts;
 
-    public User(String userName, String password, long timeStamp, int recentIncorrectAttempts) {
+    @ColumnInfo(name = "secret_question")
+    public String secretQuestion;
+
+    public User(String userName, String password, long timeStamp, int recentIncorrectAttempts, String secretQuestion) {
         this.userName = userName;
         this.password = password;
         this.timeStamp = timeStamp;
         this.recentIncorrectAttempts = recentIncorrectAttempts;
+        this.secretQuestion = secretQuestion;
     }
     @Ignore
-    public User(String userName, String password) {
+    public User(String userName, String password, String secret) {
         this.userName = userName;
         this.password = password;
         this.timeStamp = System.currentTimeMillis();
         this.recentIncorrectAttempts = 0;
+        this.secretQuestion = secret;
     }
 }

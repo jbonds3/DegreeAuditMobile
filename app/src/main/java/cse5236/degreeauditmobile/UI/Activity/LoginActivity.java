@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "THE Login Activity";
     private Button loginSubmitBtn;
     private Button newUserButton;
+    private Button forgotPasswordButton;
     private com.google.android.material.textfield.TextInputEditText loginText;
     private com.google.android.material.textfield.TextInputEditText passwordText;
     private String logout;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
+
 
 
         int rotation = getWindowManager().getDefaultDisplay().getRotation();
@@ -130,6 +132,12 @@ public class LoginActivity extends AppCompatActivity {
         newUserButton.setOnClickListener(v -> {
             Intent newUserIntent = new Intent(LoginActivity.this, NewUserActivity.class);
             startActivity(newUserIntent);
+        });
+
+        forgotPasswordButton = findViewById(R.id.forgotPasswordButton);
+        forgotPasswordButton.setOnClickListener(v -> {
+            Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(forgotPasswordIntent);
         });
 
     }

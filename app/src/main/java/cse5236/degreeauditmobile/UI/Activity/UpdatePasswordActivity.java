@@ -72,6 +72,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
 
                 String actualPassword = user.password;
 
+
                 //SHA-256 Password security
                 MessageDigest digest = null;
                 try {
@@ -83,6 +84,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                 String sha256HashStrOP = StringUtils.bytesToHex(sha256HashBytes);
 
                 if (actualPassword.equals(sha256HashStrOP)) {
+                    String secretAnswer = user.secretQuestion;
                     newPasswordText = findViewById(R.id.newPasswordTextIET);
                     String new_password = newPasswordText.getText().toString();
 
@@ -95,7 +97,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                     sha256HashBytes = digest.digest(new_password.getBytes(StandardCharsets.UTF_8));
                     String sha256HashStrNP = StringUtils.bytesToHex(sha256HashBytes);
 
-                    User updatedUser = new User(username, sha256HashStrNP);
+                    User updatedUser = new User(username, sha256HashStrNP, secretAnswer);
                     mUsersViewModel.update(updatedUser);
                     Intent mainMenuIntent = new Intent(UpdatePasswordActivity.this,MainMenuActivity.class);
                     mainMenuIntent.putExtra("username", username);

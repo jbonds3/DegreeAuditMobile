@@ -61,6 +61,20 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="400dp" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/secretTextIET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/secretQuestion"
+            android:inputType="text"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="400dp" />
+
 
     </LinearLayout>
 

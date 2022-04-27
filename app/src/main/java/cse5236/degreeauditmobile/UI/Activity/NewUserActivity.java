@@ -32,6 +32,7 @@ public class NewUserActivity extends AppCompatActivity {
     private Button CreateUserButton;
     private com.google.android.material.textfield.TextInputEditText usernameText;
     private com.google.android.material.textfield.TextInputEditText passwordText;
+    private com.google.android.material.textfield.TextInputEditText secretText;
     private UsersViewModel mUsersViewModel;
 
     @Override
@@ -65,6 +66,8 @@ public class NewUserActivity extends AppCompatActivity {
                 } else {
                     passwordText = findViewById(R.id.passwordTextIET);
                     String password = passwordText.getText().toString();
+                    secretText = findViewById(R.id.secretTextIET);
+                    String secretAnswer = secretText.getText().toString();
 
                     //SHA-256 Password security
                     MessageDigest digest = null;
@@ -76,7 +79,7 @@ public class NewUserActivity extends AppCompatActivity {
                     byte[] sha256HashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
                     String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
 
-                    User toAdd = new User(username, sha256HashStr);
+                    User toAdd = new User(username, sha256HashStr, secretAnswer);
                     mUsersViewModel.insert(toAdd);
 
                     // Start intent to main menu

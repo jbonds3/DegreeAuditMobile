@@ -37,6 +37,10 @@
 
     <!--  Forgot Password  -->
     <string name="incorrect_password_toast">Incorrect password!</string>
+    <string name="enter_username">Enter your username</string>
+    <string name="incorrect_secret_toast">Incorrect answer!</string>
+    <string name="forgotPasswordButtonText">Forgot Password</string>
+    <string name="secretQuestion">What is your favorite food?</string>
     <string name="username_not_found_toast">User with that name does not exist!</string>
 
     <!--  Account Creation  -->
