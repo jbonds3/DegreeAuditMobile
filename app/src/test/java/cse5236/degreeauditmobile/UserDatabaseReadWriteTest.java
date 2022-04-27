@@ -57,9 +57,11 @@ public class UserDatabaseReadWriteTest {
         }
         byte[] sha256HashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
-        User user = new User("Vlad", sha256HashStr);
+        String secret = "pizza";
+        User user = new User("Vlad", sha256HashStr, secret);
         userDao.insertAll(user);
         User byName = userDao.findByName("Vlad");
         assertThat(byName.password, equalTo(user.password));
+        assertThat(byName.secretQuestion, equalTo("pizza"));
     }
 }

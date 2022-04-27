@@ -35,6 +35,7 @@ import cse5236.degreeauditmobile.UI.StringUtils;
 @RunWith(AndroidJUnit4.class)
 public class ClassSemesterFunctionalityTest {
     private SemesterDao semesterDao;
+    private ClassDao classDao;
     private AppDatabase db;
 
     @Before
@@ -42,6 +43,7 @@ public class ClassSemesterFunctionalityTest {
         Context context = ApplicationProvider.getApplicationContext();
         db = DatabaseSingleton.getDatabaseInstance("Test_Database", context);
         semesterDao = db.semesterDao();
+        classDao = db.classDao();
     }
 
     @After
@@ -50,29 +52,32 @@ public class ClassSemesterFunctionalityTest {
     }
 
     @Test
-    public void addSemesterWithClasses() throws Exception {
-        Class class1 = new Class("CSE 1222", "SP 2017", "Vlad", "A");
-        Class class2 = new Class("Math 1151", "SP 2017", "Vlad", "C");
+    public void addSemesterWithClasses() {
+        Class class1 = new Class("CSE", "1222", "SP 2017", "Vlad", "A");
+        Class class2 = new Class("Math",  "1151", "SP 2017", "Vlad", "C");
         List<Class> testList = new ArrayList<>();
         testList.add(class1);
         testList.add(class2);
+
         Semester testSem = new Semester("SP", "2017", testList, "Vlad");
 
+        classDao.insert(class1);
+        classDao.insert(class2);
         semesterDao.insertAll(testSem);
         List<Semester> obtainedSemesters = semesterDao.getByUserNow("Vlad");
 
-        assertEquals("Vlad", obtainedSemesters.get(0).username);
-        assertEquals("SP", obtainedSemesters.get(0).session);
-        assertEquals("2017", obtainedSemesters.get(0).year);
-
+        assertThat("Vlad", equalTo(obtainedSemesters.get(0).username));
+        assertThat("SP", equalTo(obtainedSemesters.get(0).session));
+        assertThat("2017", equalTo(obtainedSemesters.get(0).year));
 
         List<Class> obtainedClasses = semesterDao.getClassesFromSemesterNow("SP 2017", "Vlad");
-        assertEquals("CSE", obtainedClasses.get(0).department);
-        assertEquals("1222", obtainedClasses.get(0).courseNumber);
-        assertEquals("A", obtainedClasses.get(0).grade);
-        assertEquals("Math", obtainedClasses.get(1).department);
-        assertEquals("1151", obtainedClasses.get(1).courseNumber);
-        assertEquals("C", obtainedClasses.get(1).grade);
+
+        assertThat("CSE", equalTo(obtainedClasses.get(0).department));
+        assertThat("1222", equalTo(obtainedClasses.get(0).courseNumber));
+        assertThat("A", equalTo(obtainedClasses.get(0).grade));
+        assertThat("Math", equalTo(obtainedClasses.get(1).department));
+        assertThat("1151", equalTo(obtainedClasses.get(1).courseNumber));
+        assertThat("C", equalTo(obtainedClasses.get(1).grade));
 
     }
 }

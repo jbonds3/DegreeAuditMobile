@@ -27,6 +27,18 @@ public class Helper {
 
     }
 
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     static public int findPosition(String array[], String toFind) {
         for (int i = 0; i < array.length; i++ ) {
             if (array[i].equals(toFind)) {

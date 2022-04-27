@@ -50,7 +50,10 @@ public class Class {
         this.grade = grade;
 
         String[] creditPrereqsArray = ClassID.classID(this.department, this.courseNumber);
-        this.credit = Integer.parseInt(creditPrereqsArray[0]);
+        boolean isInt = Helper.isNumeric(creditPrereqsArray[0]);
+        if (isInt) {
+            this.credit = Integer.parseInt(creditPrereqsArray[0]);
+        }
 
     }
 
@@ -65,7 +68,10 @@ public class Class {
         this.grade = grade;
 
         String[] creditPrereqsArray = ClassID.classID(this.department, this.courseNumber);
-        this.credit = Integer.parseInt(creditPrereqsArray[0]);
+        boolean isInt = Helper.isNumeric(creditPrereqsArray[0]);
+        if (isInt) {
+            this.credit = Integer.parseInt(creditPrereqsArray[0]);
+        }
 
     }
 
