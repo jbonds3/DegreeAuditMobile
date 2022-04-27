@@ -32,7 +32,8 @@
     <string name="total_credits">Total Credits</string>
     <string name="total_gpa">GPA</string>
     <string name="major_gpa">Major GPA</string>
-    <string name="populateRequirementsButtonText">Update Requirements</string>
+    <string name="populateRequirementsButtonText">Show Requirements</string>
+    <string name="hideRequirementsButtonText">Hide Requirements</string>
 
     <!--  Forgot Password  -->
     <string name="incorrect_password_toast">Incorrect password!</string>

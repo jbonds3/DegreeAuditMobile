@@ -1,11 +1,13 @@
 package cse5236.degreeauditmobile.UI.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -13,11 +15,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -117,11 +122,12 @@ public class CheckProgressActivity extends AppCompatActivity {
                         for (int i = 0; i < all_requirements.size(); i++) {
                             String req_name = all_requirements.get(i).requirement;
                             positionToReq[i] = req_name;
-                            TableLayout req_table = (TableLayout)getLayoutInflater().inflate(R.layout.table_requirement, null);
+                            ConstraintLayout const_layout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.table_requirement, null);
+                            TableLayout req_table = (TableLayout) const_layout.getChildAt(0);
                             TableRow req_row = (TableRow) req_table.getChildAt(0);
                             TextView text = (TextView)req_row.getChildAt(0);
                             text.setText(req_name);
-                            mRequirementsTable.addView(req_table);
+                            mRequirementsTable.addView(const_layout);
                             LiveData<List<RequirementClass>> current_live = mReqToClassViewModel.findByRequirement(req_name);
                             current_live.observe(this, current -> {
                             for (int j = 0; j < current.size(); j++) {
@@ -144,8 +150,10 @@ public class CheckProgressActivity extends AppCompatActivity {
                                 completed_table.setText(completion);
                                 grade_table.setText(grade);
                                 int table_number = Helper.findPosition(positionToReq, current.get(0).requirement);
-                                TableLayout thatReq = (TableLayout)mRequirementsTable.getChildAt(table_number);
-                                thatReq.addView(class_row);
+                                ConstraintLayout thatReq = (ConstraintLayout)mRequirementsTable.getChildAt(table_number);
+                                TableLayout thatReqTable = (TableLayout) thatReq.getChildAt(0);
+                                thatReqTable.addView(class_row);
+                                Log.d(TAG, thatReq.getParent().toString());
                             }
                             });
                         }
@@ -158,28 +166,71 @@ public class CheckProgressActivity extends AppCompatActivity {
 
         mUpdateRequirementsButton = findViewById(R.id.populateRequirementsButton);
         mUpdateRequirementsButton.setOnClickListener(v -> {
-            String req1 = "Fundamentals";
-            String req2 = "Advanced";
+            String req1 = "Math and Science";
+            String req2 = "Core";
+            String req3 = "Ethics";
             if (!mRequirementViewModel.contains(req1)) {
                 ProgressRequirements req = new ProgressRequirements(req1);
                 mRequirementViewModel.insert(req);
-                RequirementClass reqclass1 = new RequirementClass(req1, "CSE 1223");
-                RequirementClass reqclass2 = new RequirementClass(req1, "CSE 2221");
+                RequirementClass reqclass1 = new RequirementClass(req1, "Math 1151");
+                RequirementClass reqclass2 = new RequirementClass(req1, "Math 1152");
+                RequirementClass reqclass3 = new RequirementClass(req1, "Math 3345");
+                RequirementClass reqclass4 = new RequirementClass(req1, "Physics 1250");
                 mReqToClassViewModel.insert(reqclass1);
                 mReqToClassViewModel.insert(reqclass2);
+                mReqToClassViewModel.insert(reqclass3);
+                mReqToClassViewModel.insert(reqclass4);
             }
 
             if (!mRequirementViewModel.contains(req2)) {
                 ProgressRequirements req = new ProgressRequirements(req2);
                 mRequirementViewModel.insert(req);
-                RequirementClass reqclass1 = new RequirementClass(req2, "CSE 2321");
+                RequirementClass reqclass1 = new RequirementClass(req2, "CSE 2221");
+                RequirementClass reqclass2 = new RequirementClass(req2, "CSE 2231");
+                RequirementClass reqclass3 = new RequirementClass(req2, "CSE 2321");
+                RequirementClass reqclass4 = new RequirementClass(req2, "CSE 2331");
+                RequirementClass reqclass5 = new RequirementClass(req2, "CSE 2421");
+                RequirementClass reqclass6 = new RequirementClass(req2, "CSE 2431");
+                RequirementClass reqclass7 = new RequirementClass(req2, "ECE 2060");
+                RequirementClass reqclass8 = new RequirementClass(req2, "CSE 3231");
+                RequirementClass reqclass9 = new RequirementClass(req2, "CSE 3341");
+                RequirementClass reqclass10 = new RequirementClass(req2, "CSE 3421");
+                RequirementClass reqclass11 = new RequirementClass(req2, "CSE 3521");
                 mReqToClassViewModel.insert(reqclass1);
+                mReqToClassViewModel.insert(reqclass2);
+                mReqToClassViewModel.insert(reqclass3);
+                mReqToClassViewModel.insert(reqclass4);
+                mReqToClassViewModel.insert(reqclass5);
+                mReqToClassViewModel.insert(reqclass6);
+                mReqToClassViewModel.insert(reqclass7);
+                mReqToClassViewModel.insert(reqclass8);
+                mReqToClassViewModel.insert(reqclass9);
+                mReqToClassViewModel.insert(reqclass10);
+                mReqToClassViewModel.insert(reqclass11);
+            }
+
+            if (!mRequirementViewModel.contains(req3)) {
+                ProgressRequirements req = new ProgressRequirements(req3);
+                mRequirementViewModel.insert(req);
+                RequirementClass reqclass1 = new RequirementClass(req3, "CSE 2501");
+                RequirementClass reqclass2 = new RequirementClass(req3, "Philos 1338");
+                mReqToClassViewModel.insert(reqclass1);
+                mReqToClassViewModel.insert(reqclass2);
+            }
+
+            if (mRequirementsTable.getVisibility() == View.GONE) {
+                mRequirementsTable.setVisibility(View.VISIBLE);
+                mUpdateRequirementsButton.setText(R.string.hideRequirementsButtonText);
+            } else {
+                mRequirementsTable.setVisibility(View.GONE);
+                mUpdateRequirementsButton.setText(R.string.populateRequirementsButtonText);
             }
 
 
         });
 
         mRequirementsTable = findViewById(R.id.requirementsTable);
+        mRequirementsTable.setVisibility(View.GONE);
 
 /*
         createGroupList();
