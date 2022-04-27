@@ -11,6 +11,7 @@ import cse5236.degreeauditmobile.R;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Surface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,7 +36,13 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_class);
+
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            setContentView(R.layout.fragment_edit_class_land);
+        } else {
+            setContentView(R.layout.activity_edit_class);
+        }
 
         Bundle bundle = getIntent().getExtras();
         mAcademicYearText = bundle.getString("SEMESTERPID");
