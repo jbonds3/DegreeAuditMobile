@@ -22,5 +22,8 @@
     <item
         android:id="@+id/deleteSemsClasses"
         android:title="@string/delete_sem_class_button" />
+    <item
+        android:id="@+id/gradMajorEntry"
+        android:title="@string/GraduationMajorEntryText" />
 
 </menu>

@@ -41,9 +41,9 @@
         android:id="@+id/departmentTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/departmentText"
         android:textSize="24sp"
-        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="@+id/academicYearClassTV"
         app:layout_constraintTop_toBottomOf="@+id/academicYearClassTV" />
 
@@ -97,9 +97,8 @@
 
     <ScrollView
         android:layout_width="239dp"
-        android:layout_height="275dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
         android:contentDescription="@string/courseNumberText"
         android:fillViewport="false"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,18 +111,6 @@
             android:orientation="vertical" />
 
     </ScrollView>
-
-    <TextView
-        android:id="@+id/addClassTV"
-        android:layout_width="106dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
-        android:text=""
-        android:textSize="24dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/gradeSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/gradeSpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

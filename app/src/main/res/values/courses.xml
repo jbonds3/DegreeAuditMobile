@@ -2,6 +2,14 @@
 <resources>
     <string-array name="CSECourses_array">
         <item>Courses</item>
+
+        <item>AFAMAST 1121</item>
+
+        <item>COMM 1100</item>
+        <item>COMM 2110</item>
+
+        <item>COMPSTD 2105</item>
+
         <item>CSE 1223</item>
         <item>CSE 2221</item>
         <item>CSE 2231</item>
@@ -20,13 +28,30 @@
         <item>CSE 3901</item>
         <item>CSE 3902</item>
         <item>CSE 3903</item>
+        <item>CSE 4251</item>
+        <item>CSE 4252</item>
+        <item>CSE 4471</item>
+        <item>CSE 5236</item>
         <item>CSE 5911</item>
         <item>CSE 5912</item>
         <item>CSE 5913</item>
         <item>CSE 5914</item>
         <item>CSE 5915</item>
 
+        <item>EARTHSC 1121</item>
+
+        <item>ECE 2020</item>
+        <item>ECE 2060</item>
+
         <item>ENGR 1100</item>
+        <item>ENGR 1181</item>
+        <item>ENGR 1182</item>
+        <item>ENGR 1196</item>
+        <item>ENGR 2367</item>
+
+        <item>ENGLISH 1110</item>
+
+        <item>LING 3801</item>
 
         <item>PHILOS 1138</item>
 
@@ -42,5 +67,8 @@
         <item>MATH 3345</item>
 
         <item>STAT 3470</item>
+
+        <item>THEATRE 2811</item>
+        <item></item>
     </string-array>
 </resources>

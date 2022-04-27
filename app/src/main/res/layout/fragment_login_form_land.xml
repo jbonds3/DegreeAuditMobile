@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_login_form_land">
+
+    <TextView
+        android:id="@+id/signInTextLand"
+        android:layout_width="194dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/signInText"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/signInTextIET"
+        android:layout_width="236dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:hint="@string/signInText"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@+id/signInTextLand"
+        app:layout_constraintTop_toBottomOf="@+id/signInTextLand"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordTextIET"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
+        android:hint="@string/passwordText"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/signInTextIET"
+        app:layout_constraintTop_toBottomOf="@+id/signInTextIET" />
+
+    <Button
+        android:id="@+id/loginSubmitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:text="@string/loginSubmitBtnText"
+        app:layout_constraintStart_toEndOf="@+id/signInTextIET"
+        app:layout_constraintTop_toTopOf="@+id/signInTextIET" />
+
+    <Button
+        android:id="@+id/newUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newUserButtonText"
+        app:layout_constraintStart_toStartOf="@+id/loginSubmitBtn"
+        app:layout_constraintTop_toTopOf="@+id/passwordTextIET" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

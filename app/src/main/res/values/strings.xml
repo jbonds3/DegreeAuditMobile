@@ -42,7 +42,7 @@
     <string name="username_already_exists_toast">This username is already taken! Please choose a different one.</string>
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="newUserButtonText">Create new user</string>\
-    <string name="new_user_text">New account registration</string>
+    <string name="new_user_text">New Account Registration</string>
     <string name="title_activity_check_progress">CheckProgressActivity</string>
 
     <!--  Add Semester  -->
@@ -66,4 +66,7 @@
     <string name="DarkModeButtonText">Switch to dark theme</string>
     <string name="DefaultModeButtonText">Switch to default theme</string>
 
+    <!-- Graduation and Major Entry   -->
+    <string name="GraduationMajorEntryText">Graduation and Major Entry</string>
+    <string name="nextBtn">Done</string>
 </resources>

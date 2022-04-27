@@ -1,5 +1,6 @@
 package cse5236.degreeauditmobile.UI.Fragment;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -77,9 +79,17 @@ public class MainMenuFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_semesters_and_classes_page, container, false);
+        View v;
+        Activity activity = requireActivity();
+
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_semesters_and_classes_page_land, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_semesters_and_classes_page, container, false);
+        }
+        return v;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -112,7 +122,7 @@ public class MainMenuFragement extends Fragment {
                     if (classes.size() > 0) {
                         String classListStr = "";
                         for (Class c : classes) {
-                            classListStr += c.title() + " " + c.grade + "\n";
+                            classListStr +=  c.title() + new String(new char[25 - c.title().length()]).replace('\0', ' ') + c.grade + "\n";
                         }
                         classMMTV.setText(classListStr);
                     } else {

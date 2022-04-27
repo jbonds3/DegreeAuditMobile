@@ -89,10 +89,10 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
             String classToDeleteStr = editClassSpinner.getSelectedItem().toString();
             Class classToDelete = new Class(classToDeleteStr, mAcademicYearText, mUsername, "");
             mSemestersViewModel.delete(classToDelete);
-            Intent intent = getIntent();
-            finish();
-            intent.putExtra("username", mUsername);
-            startActivity(intent);
+//            Intent intent = getIntent();
+//            finish();
+//            intent.putExtra("username", mUsername);
+//            startActivity(intent);
         });
 
         Button editAddClassButton = findViewById(R.id.editAddClass);
@@ -101,10 +101,10 @@ public class EditClassActivity extends AppCompatActivity implements AdapterView.
             String grade = mGradeSpinner.getSelectedItem().toString();
             Class classToAdd = new Class(classToDeleteStr, mAcademicYearText, mUsername, grade);
             mSemestersViewModel.insert(classToAdd);
-            Intent intent = getIntent();
-            finish();
-            intent.putExtra("username", mUsername);
-            startActivity(intent);
+//            Intent intent = getIntent();
+//            finish();
+//            intent.putExtra("username", mUsername);
+//            startActivity(intent);
         });
 
         Button editNextPage = findViewById(R.id.editNextPage);

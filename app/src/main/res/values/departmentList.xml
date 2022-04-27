@@ -2,12 +2,21 @@
 <resources>
     <string-array name="department_array">
         <item>Major</item>
+        <item>AFAMAST</item>
+        <item>COMM</item>
+        <item>COMPSTD</item>
         <item>CSE</item>
+        <item>EARTHSC</item>
+        <item>ECE</item>
+        <item>ENGLISH</item>
         <item>ENGR</item>
+        <item>LING</item>
         <item>MATH</item>
         <item>PHILOS</item>
         <item>PHYSICS</item>
+        <item>RURALSOC</item>
         <item>STAT</item>
+        <item>THEATRE</item>
     </string-array>
 
     <string-array name="grade_array">
@@ -19,5 +28,16 @@
         <item>C+</item>
         <item>C</item>
         <item>C-</item>
+    </string-array>
+
+    <string-array name="specialization_array">
+        <item>AIT</item>
+        <item>CGG</item>
+        <item>DBA</item>
+        <item>ICA</item>
+        <item>CNT</item>
+        <item>CSY</item>
+        <item>SWS</item>
+        <item>IND</item>
     </string-array>
 </resources>

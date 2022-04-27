@@ -3,9 +3,52 @@
     <string-array name="ENGRCourseNumber_array">
         <item>Course Number</item>
         <item>1100</item>
+        <item>1181</item>
+        <item>1182</item>
+        <item>1196</item>
+        <item>2367</item>
+    </string-array>
+    <string-array name="EARTHSCCourseNumber_array">
+        <item>Course Number</item>
+        <item>1121</item>
+    </string-array>
+    <string-array name="COMMCourseNumber_array">
+        <item>Course Number</item>
+        <item>1100</item>
+        <item>2110</item>
+    </string-array>
+    <string-array name="RURALSOCCourseNumber_array">
+        <item>Course Number</item>
+        <item>1500</item>
+    </string-array>
+    <string-array name="COMPSTDCourseNumber_array">
+        <item>Course Number</item>
+        <item>2105</item>
+    </string-array>
+    <string-array name="AFAMASTCourseNumber_array">
+        <item>Course Number</item>
+        <item>1121</item>
+    </string-array>
+    <string-array name="THEATRECourseNumber_array">
+        <item>Course Number</item>
+        <item>2811</item>
+    </string-array>
+    <string-array name="ECECourseNumber_array">
+        <item>Course Number</item>
+        <item>2060</item>
+        <item>2020</item>
+    </string-array>
+    <string-array name="LINGCourseNumber_array">
+        <item>Course Number</item>
+        <item>3801</item>
+    </string-array>
+    <string-array name="ENGLISHCourseNumber_array">
+        <item>Course Number</item>
+        <item>1110</item>
     </string-array>
     <string-array name="PHILOSCourseNumber_array">
         <item>Course Number</item>
+        <item>1132</item>
         <item>1138</item>
     </string-array>
     <string-array name="PHYSICSCourseNumber_array">
@@ -46,6 +89,10 @@
         <item>3901</item>
         <item>3902</item>
         <item>3903</item>
+        <item>4251</item>
+        <item>4252</item>
+        <item>4471</item>
+        <item>5236</item>
         <item>5911</item>
         <item>5912</item>
         <item>5913</item>

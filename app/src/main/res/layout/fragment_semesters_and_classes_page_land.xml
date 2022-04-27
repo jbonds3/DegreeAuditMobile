@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,17 +32,19 @@
             android:id="@+id/previousBtnMM"
             android:layout_width="76dp"
             android:layout_height="48dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="100dp"
             android:text="@string/previous"
-            app:layout_constraintStart_toStartOf="@+id/classMMTV"
-            app:layout_constraintTop_toBottomOf="@+id/classMMTV" />
+            app:layout_constraintStart_toEndOf="@+id/classMMTV"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/nextBtnMM"
             android:layout_width="76dp"
             android:layout_height="48dp"
+            android:layout_marginStart="80dp"
             android:text="@string/next"
-            app:layout_constraintEnd_toEndOf="@+id/classMMTV"
+            app:layout_constraintStart_toEndOf="@+id/previousBtnMM"
             app:layout_constraintTop_toTopOf="@+id/previousBtnMM" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

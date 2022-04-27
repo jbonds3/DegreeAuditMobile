@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.PopupMenu;
 
-import java.util.Iterator;
-import java.util.ListIterator;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
-import cse5236.degreeauditmobile.Model.Semester;
-import cse5236.degreeauditmobile.Model.SemesterLiveData;
 import cse5236.degreeauditmobile.Model.ViewModel.SemestersViewModel;
 import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.UI.Fragment.MainMenuFragement;
@@ -35,6 +30,13 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            setContentView(R.layout.fragment_main_menu_land);
+        } else {
+            setContentView(R.layout.activity_main_menu);
+        }
 
         Log.d(TAG, "onCreate() called");
         Intent myIntent = getIntent();
@@ -75,6 +77,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 String logoutAccountStr = getString(R.string.logout_account_button);
                 String deleteStr = getString(R.string.delete_sem_class_button);
                 String editSemesterStr = getString(R.string.edit_semester_button);
+                String gradMajorEntryStr = getString(R.string.GraduationMajorEntryText);
 
                 if (menuItem.getTitle().equals(checkProgressStr)) {
                     Intent checkProgressIntent = new Intent(MainMenuActivity.this,CheckProgressActivity.class);
@@ -103,6 +106,10 @@ public class MainMenuActivity extends AppCompatActivity {
                     Intent editSemesterIntent = new Intent(MainMenuActivity.this,EditSemesterActivity.class);
                     editSemesterIntent.putExtra("username", mUsername);
                     startActivity(editSemesterIntent);
+                } else if (menuItem.getTitle().equals(gradMajorEntryStr)) {
+                    Intent gradMajorEntryIntent = new Intent(MainMenuActivity.this,GradMajorEntryActivity.class);
+                    gradMajorEntryIntent.putExtra("username", mUsername);
+                    startActivity(gradMajorEntryIntent);
                 } else {
                     // Toast message on menu item clicked
                     Toast.makeText(MainMenuActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();

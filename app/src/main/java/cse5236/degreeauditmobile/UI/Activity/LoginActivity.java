@@ -12,9 +12,12 @@ import cse5236.degreeauditmobile.R;
 import cse5236.degreeauditmobile.Model.UserDao;
 import cse5236.degreeauditmobile.UI.StringUtils;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -42,7 +45,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
-        setContentView(R.layout.activity_login);
+
+
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            setContentView(R.layout.fragment_login_form_land);
+        } else {
+            setContentView(R.layout.activity_login);
+        }
+
         Intent myIntent = getIntent();
         if (myIntent.hasExtra("logout")) {
             logout = myIntent.getStringExtra("logout");
@@ -58,64 +69,64 @@ public class LoginActivity extends AppCompatActivity {
 
         // LOGIN BTN onClickListener with lambda exp
         loginSubmitBtn.setOnClickListener(v -> {
-                loginText = findViewById(R.id.signInTextIET);
-                String username = loginText.getText().toString();
+            loginText = findViewById(R.id.signInTextIET);
+            String username = loginText.getText().toString();
 
-                // if user in Room database
-                if (mUsersViewModel.contains(username)) {
-                    User currentUser = mUsersViewModel.getUserNow(username);
-                    long currentTimeStamp = System.currentTimeMillis();
-                    if ((currentUser.recentIncorrectAttempts > maxAttempts) && (currentTimeStamp - currentUser.timeStamp < timeout)) {
-                        int message = R.string.timeout_toast;
-                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+            // if user in Room database
+            if (mUsersViewModel.contains(username)) {
+                User currentUser = mUsersViewModel.getUserNow(username);
+                long currentTimeStamp = System.currentTimeMillis();
+                if ((currentUser.recentIncorrectAttempts > maxAttempts) && (currentTimeStamp - currentUser.timeStamp < timeout)) {
+                    int message = R.string.timeout_toast;
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                } else {
+                    passwordText = findViewById(R.id.passwordTextIET);
+                    String enteredPassword = passwordText.getText().toString();
+
+                    //SHA-256 Password security
+                    MessageDigest digest = null;
+                    try {
+                        digest = MessageDigest.getInstance("SHA-256");
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+                    byte[] sha256HashBytes = digest.digest(enteredPassword.getBytes(StandardCharsets.UTF_8));
+                    String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
+
+                    String actualPassword = currentUser.password;
+
+                    // check input password match user password
+                    if (sha256HashStr.equals(actualPassword)) {
+                        currentUser.recentIncorrectAttempts = 0;
+                        mUsersViewModel.update(currentUser);
+                        Intent mainMenuIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                        mainMenuIntent.putExtra("username", username);
+                        startActivity(mainMenuIntent);
                     } else {
-                        passwordText = findViewById(R.id.passwordTextIET);
-                        String enteredPassword = passwordText.getText().toString();
-
-                        //SHA-256 Password security
-                        MessageDigest digest = null;
-                        try {
-                            digest = MessageDigest.getInstance("SHA-256");
-                        } catch (NoSuchAlgorithmException e) {
-                            e.printStackTrace();
-                        }
-                        byte[] sha256HashBytes = digest.digest(enteredPassword.getBytes(StandardCharsets.UTF_8));
-                        String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
-
-                        String actualPassword = currentUser.password;
-
-                        // check input password match user password
-                        if (sha256HashStr.equals(actualPassword)) {
-                            currentUser.recentIncorrectAttempts = 0;
-                            mUsersViewModel.update(currentUser);
-                            Intent mainMenuIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
-                            mainMenuIntent.putExtra("username", username);
-                            startActivity(mainMenuIntent);
+                        long lastAttempt = currentUser.timeStamp;
+                        currentUser.timeStamp = currentTimeStamp;
+                        if (lastAttempt - currentTimeStamp < recentTimer) {
+                            currentUser.recentIncorrectAttempts = currentUser.recentIncorrectAttempts + 1;
                         } else {
-                            long lastAttempt = currentUser.timeStamp;
-                            currentUser.timeStamp = currentTimeStamp;
-                            if (lastAttempt - currentTimeStamp < recentTimer) {
-                                currentUser.recentIncorrectAttempts = currentUser.recentIncorrectAttempts + 1;
-                            } else {
-                                currentUser.recentIncorrectAttempts = 1;
-                            }
-                            mUsersViewModel.update(currentUser);
-                            int message = R.string.incorrect_password_toast;
-                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                            currentUser.recentIncorrectAttempts = 1;
                         }
-                    }
-                    } else{
-                        int message = R.string.username_not_found_toast;
+                        mUsersViewModel.update(currentUser);
+                        int message = R.string.incorrect_password_toast;
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
+                }
+            } else {
+                int message = R.string.username_not_found_toast;
+                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
         });
 
         mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
         newUserButton = findViewById(R.id.newUserButton);
         newUserButton.setOnClickListener(v -> {
-                Intent newUserIntent = new Intent(LoginActivity.this,NewUserActivity.class);
-                startActivity(newUserIntent);
+            Intent newUserIntent = new Intent(LoginActivity.this, NewUserActivity.class);
+            startActivity(newUserIntent);
         });
 
     }

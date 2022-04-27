@@ -1,21 +1,15 @@
 package cse5236.degreeauditmobile.Model.ViewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import cse5236.degreeauditmobile.Model.AppDatabase;
 import cse5236.degreeauditmobile.Model.Class;
 import cse5236.degreeauditmobile.Model.ClassRepo;
 import cse5236.degreeauditmobile.Model.Semester;
-import cse5236.degreeauditmobile.Model.SemesterLiveData;
 import cse5236.degreeauditmobile.Model.SemesterRepo;
 
 public class SemestersViewModel extends AndroidViewModel {

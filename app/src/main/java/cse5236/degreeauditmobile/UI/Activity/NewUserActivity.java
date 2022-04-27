@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Surface;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -35,7 +36,13 @@ public class NewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
-        setContentView(R.layout.activity_new_user);
+
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            setContentView(R.layout.fragment_new_user_land);
+        } else {
+            setContentView(R.layout.activity_new_user);
+        }
 
         mUsersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 

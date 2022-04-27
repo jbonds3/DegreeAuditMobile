@@ -9,30 +9,33 @@
 
     <TextView
         android:id="@+id/academicYearTV"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/academicYearText"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/GraduationMajorEntryText"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
+    <TextView
         android:id="@+id/sessionSpinner"
         android:layout_width="150dp"
         android:layout_height="70dp"
         android:layout_marginTop="48dp"
+        android:text="CSE"
+        android:textSize="36dp"
         app:layout_constraintStart_toStartOf="@+id/academicYearTV"
         app:layout_constraintTop_toBottomOf="@+id/academicYearTV" />
 
-    <Spinner
+    <TextView
         android:id="@+id/yearSpinner"
         android:layout_width="141dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:text="IND"
+        android:textSize="36dp"
         app:layout_constraintStart_toEndOf="@+id/sessionSpinner"
         app:layout_constraintTop_toTopOf="@+id/sessionSpinner" />
 
@@ -40,20 +43,31 @@
         android:id="@+id/addSemToAddClassBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="56dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="@+id/yearSpinner"
         app:layout_constraintTop_toBottomOf="@+id/yearSpinner" />
 
+
     <TextView
         android:id="@+id/addSemTVDisplay"
-        android:layout_width="333dp"
-        android:layout_height="141dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="104dp"
+        android:layout_width="141dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="52dp"
         android:text=""
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/sessionSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/sessionSpinner" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSemToAddClassBtn" />
+
+    <TextView
+        android:id="@+id/addSemTVDisplay2"
+        android:layout_width="141dp"
+        android:layout_height="106dp"
+        android:layout_marginEnd="40dp"
+        android:text="Major: \n\nGraduate:"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/addSemTVDisplay"
+        app:layout_constraintTop_toTopOf="@+id/addSemTVDisplay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
         android:layout_width="271dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/editDisplayClassesTV"
         app:layout_constraintTop_toBottomOf="@+id/editDisplayClassesTV" />
 
@@ -38,7 +38,7 @@
         android:id="@+id/editDeleteClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="88dp"
         android:text="@string/editDeleteClassText"
         app:layout_constraintStart_toStartOf="@+id/editClassList"
         app:layout_constraintTop_toBottomOf="@+id/editClassList" />
@@ -55,7 +55,7 @@
         android:id="@+id/editNextPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="@+id/editAddClass"
         app:layout_constraintTop_toBottomOf="@+id/editAddClass" />

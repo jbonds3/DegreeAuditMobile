@@ -88,8 +88,65 @@ public class ClassID {
             if (courseNumber.equals("1100")) {
                 creditPrereqsArray[0] = "1";
 //            this.prereqs = null;
+            } else if (courseNumber.equals("1181")) {
+                creditPrereqsArray[0] = "4";
+            } else if (courseNumber.equals("1182")) {
+                creditPrereqsArray[0] = "4";
+            } else if (courseNumber.equals("1196")) {
+                creditPrereqsArray[0] = "4";
+            } else if (courseNumber.equals("2367")) {
+                creditPrereqsArray[0] = "4";
             }
-        } else if (department.equals("MATH")) {
+        } else if (department.equals("ENGLISH")) {
+            if (courseNumber.equals("1110")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("EARTHSC")) {
+            if (courseNumber.equals("1121")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("COMM")) {
+            if (courseNumber.equals("1100")) {
+                creditPrereqsArray[0] = "3";
+            } if (courseNumber.equals("2110")) {
+                creditPrereqsArray[0] = "3";
+            }
+        } else if (department.equals("RURALSOC")) {
+            if (courseNumber.equals("1500")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("COMPSTD")) {
+            if (courseNumber.equals("2105")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("AFAMAST")) {
+            if (courseNumber.equals("1121")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("THEATRE")) {
+            if (courseNumber.equals("2811")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("LING")) {
+            if (courseNumber.equals("3801")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        } else if (department.equals("ECE")) {
+            if (courseNumber.equals("2060")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            } else if (courseNumber.equals("2020")) {
+                creditPrereqsArray[0] = "3";
+//            this.prereqs = null;
+            }
+        }  else if (department.equals("MATH")) {
             if (courseNumber.equals("1151")) {
                 creditPrereqsArray[0] = "5";
 //            this.prereqs = null;
@@ -114,6 +171,9 @@ public class ClassID {
             }
         } else if (department.equals("PHILOS")) {
             if (courseNumber.equals("1138")) {
+                creditPrereqsArray[0] = "4";
+//            this.prereqs = null;
+            } else if (courseNumber.equals("1332")) {
                 creditPrereqsArray[0] = "4";
 //            this.prereqs = null;
             }
